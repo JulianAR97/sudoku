@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import { getPuzzle } from './actions/puzzleActions'
+import DifficultySelect from './components/DifficultySelect'
+import { connect } from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const difficulties = ['easy', 'medium', 'hard', 'very-hard', 'insane', 'inhuman']
+
+class App extends Component{
+  
+  handleDifficultySelect = (e) => {
+    this.props.getPuzzle(e.target.value)
+  }
+
+  render() {
+    debugger;
+    if (!!!this.props.puzzle) {
+      return (
+        <div className="App">
+          <DifficultySelect difficulties={difficulties} handleClick={this.handleDifficultySelect} />
+        </div>
+      );
+    }
+
+    else {
+      return (
+        <div>
+          hello world
+        </div>
+      )
+    }
+  }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  puzzle: state.puzzle
+})
+
+export default connect(mapStateToProps, {getPuzzle})(App);
