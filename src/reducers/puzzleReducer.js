@@ -1,6 +1,11 @@
+
+
 const initialState = {
   puzzle: '',
-  solution: ''
+  solution: '',
+  puzzleArr: [],
+  mutables: [],
+  puzzleObj: {}
 }
 
 const puzzleReducer = (state = initialState, action) => {
@@ -9,7 +14,10 @@ const puzzleReducer = (state = initialState, action) => {
       return {
         ...state,
         puzzle: action.puzzleInfo.puzzle,
-        solution: action.puzzleInfo.solution
+        solution: action.puzzleInfo.solution,
+        puzzleArr: action.puzzleInfo.puzzleArr,
+        puzzleObj: action.puzzleInfo.puzzleObj,
+        mutables: action.puzzleInfo.mutables
       }
     
     default: 

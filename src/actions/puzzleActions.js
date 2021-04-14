@@ -1,7 +1,9 @@
 
 import SudokuToolCollection from 'sudokutoolcollection'
-const sudoku = SudokuToolCollection();
+import { findMutables } from '../helpers/gameHelpers'
 
+
+const sudoku = SudokuToolCollection();
 /* 
 Difficulty levels:
 
@@ -17,9 +19,12 @@ Can also generate a specific number of squares by passing in an integer as an ar
 export const getPuzzle = (difficulty) => {
   // puzzle will be string of numbers with null squares being '.' ex: '1..2..8..4...3'
   const puzzle = sudoku.generator.generate(difficulty);
+  const puzzleArr = sudoku.conversions.stringToGrid(puzzle);
   const solution = sudoku.solver.solve(puzzle);
-  let puzzleInfo = {puzzle, solution}
-  debugger;
+  const puzzleObj =sudoku.conversions.stringToObject(puzzle)
+  const mutables = findMutables(puzzleArr)
+  console.log(`mutables: ${mutables}`)
+  let puzzleInfo = {puzzle, solution, puzzleArr, puzzleObj, mutables}
   return dispatch => {
     dispatch({type: 'SET_PUZZLE', puzzleInfo})
   }
