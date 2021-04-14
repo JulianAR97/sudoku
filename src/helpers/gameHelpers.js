@@ -22,12 +22,6 @@ export const numToAlpha = (num) => {
   return conversion[num];
 }
 
-// Wrapper function
-export const getMutableSquares = (puzzleObj) => {
-  let puzzleArr = puzzleObjToArr(puzzleObj);
-  let mutables = findMutables(puzzleArr)
-  return mutables
-}
 
 // Checking for all '.' in original puzzle which indicate a null value
 // Adding it to list of mutables to return and send from board to cell component as prop
@@ -44,3 +38,8 @@ export const findMutables = (puzzleArr) => {
   }
   return mutables
 } 
+
+export const notMutable = (mutableInfo) => {
+  const {cell, mutables} = mutableInfo
+  return (mutables.indexOf(cell) === -1)
+}
