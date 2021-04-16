@@ -23,11 +23,11 @@ export const getPuzzle = (difficulty) => {
   const solution = sudoku.solver.solve(puzzle);
   const puzzleObj =sudoku.conversions.stringToObject(puzzle)
   const mutables = findMutables(puzzleArr)
-  console.log(`mutables: ${mutables}`)
   let puzzleInfo = {puzzle, solution, puzzleArr, puzzleObj, mutables}
   return dispatch => {
     dispatch({type: 'SET_PUZZLE', puzzleInfo})
   }
-
-
 }
+
+
+
