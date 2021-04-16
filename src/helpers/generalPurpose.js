@@ -38,35 +38,37 @@ const removeClassFromAll = (tag, klass) => {
   })
 }
 
-const addClassToAll = (tag, klass) => {
-  const elements = document.getElementsByTagName(tag);
-  const eleArr = [...elements];
-  eleArr.map(ele => {
-    addClass(ele, klass);
-    return ele;
-  })
-}
+// const addClassToAll = (tag, klass) => {
+//   const elements = document.getElementsByTagName(tag);
+//   const eleArr = [...elements];
+//   eleArr.map(ele => {
+//     addClass(ele, klass);
+//     return ele;
+//   })
+// }
 
 const removeClassesFromAll = (tag, klassList) => {
   klassList.forEach(klass => removeClassFromAll(tag, klass))
 }
 
 
-export const handleTDClick = (event) => {
+export const handleTDClick = (event, currSelected) => {
   removeClassesFromAll(event.target.tagName, ['highlightGrey', 'green'])
-  const [letter, num] = event.target.id.split('')
-  const value = event.target.value
-  const inputs = document.getElementsByTagName('input')
-  const inputsArr = [...inputs]
-  inputsArr.map(input => {
-    const [inpLetter, inpNum] = input.id.split('')
-    const inpValue = input.value;
-    if (inpLetter === letter || inpNum === num) {
-      addClass(input, 'highlightGrey')
-    }
-    if (value === inpValue) {
-      addClass(input, 'green')
-    }
-    return input;
-  })
+  if (event.target.id !== currSelected) {
+    const [letter, num] = event.target.id.split('')
+    const value = event.target.value
+    const inputs = document.getElementsByTagName('input')
+    const inputsArr = [...inputs]
+    inputsArr.map(input => {
+      const [inpLetter, inpNum] = input.id.split('')
+      const inpValue = input.value;
+      if (inpLetter === letter || inpNum === num) {
+        addClass(input, 'highlightGrey')
+      }
+      if (value === inpValue) {
+        addClass(input, 'green')
+      }
+      return input;
+    })
+  }
 }

@@ -54,6 +54,7 @@ class Board extends Component {
   }
 
   render() {
+
     this.focusInput()
     if (checkPuzzle({puzzleObj: this.state.boardState, solution: this.props.solution})) {
       return 'yes'
