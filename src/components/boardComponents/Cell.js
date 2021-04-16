@@ -1,14 +1,19 @@
 import { connect } from 'react-redux'
 import { notMutable } from '../../helpers/gameHelpers'
-
+import { handleTDClick } from '../../helpers/generalPurpose'
 import '../../styles/board.css'
 
 const Cell = (props) => {
 
+  const handleClick = (event) => {
+    handleTDClick(event)
+    event.target.classList.add('highlightGrey')
+  }
+
   if (notMutable({cell: props.inputID, mutables: props.mutables})) {
     return (
-      <td className="cell" >
-        <input type="text" maxLength="1" value={props.cellValue} disabled />
+      <td className="cell" onClick={handleClick}>
+        <input id={props.inputID} type="text" maxLength="1" value={props.cellValue} disabled />
       </td>
     )
   } else {
