@@ -69,11 +69,16 @@ export const getCandidates = (puzzleObj, cell) => {;
   let rowIdx = alphaToNum(rowAlpha);
   let colIdx = col - 1
   let candidates = [];
-  candidates.push(puzzleArr[rowIdx][colIdx])
+  // Need to these two values to array to handle the initial null value, as well as the value
+  // That we get when an input is deleted
+  candidates.push(puzzleArr[rowIdx][colIdx], '')
   if (candidates[0] === '.') {
-    console.log('hello: ', findCandidates({puzzleArr: puzzleArr, colIdx: colIdx, rowIdx: rowIdx}))
+    candidates.push(findCandidates({puzzleArr: puzzleArr, colIdx: colIdx, rowIdx: rowIdx}))
   }
-  return candidates
+  // Need to return a flat, one-dimensional array with all the values as strings
+  // To match the event target value from input
+  candidates.push()
+  return candidates.flat().map(c => c.toString())
 }
 
 export const findCandidates = (puzzleInfo) => {
