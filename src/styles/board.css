@@ -55,3 +55,15 @@
 .row:nth-child(1) > .cell {
   border-top: 3px solid #000000;
 }
+
+.cell > input.red {
+  color: red;
+}
+
+.cell > input.green {
+  color: green;
+}
+
+.cell > input.highlightGrey {
+  background-color: rgba(0, 0, 0, .25)
+}
