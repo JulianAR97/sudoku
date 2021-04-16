@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Row from '../components/boardComponents/Row'
 import '../styles/board.css'
-import { puzzleObjToArr, numToAlpha } from '../helpers/gameHelpers'
-
-
-
+import { puzzleObjToArr, numToAlpha, checkPuzzle, getCandidates } from '../helpers/gameHelpers'
+import { redHighlighting } from '../helpers/generalPurpose'
 
 
 class Board extends Component {
@@ -18,38 +16,59 @@ class Board extends Component {
   }
 
   handleChange = (event) => {
+    const candidates = getCandidates(this.state.boardState, event.target.id)
+    redHighlighting({target: event.target, candidates})
     const key = event.target.id
     // Won't render if value is ''
     // Need to figure out why
     const value = event.target.value || '.'
-    debugger;
     this.setState(prevState => ({
       ...prevState,
       boardState: {...prevState.boardState, [key]: value }
     }))
+    
   }
 
   renderRows() {
     const puzzleArr = puzzleObjToArr(this.state.boardState)
     return puzzleArr.map((row, i) => {
-      return <Row 
-        handleChange={this.handleChange} 
-        className={numToAlpha(i)} key={i} 
-        rowValues={row} 
-      />
+      return (
+        <Row 
+          handleChange={this.handleChange} 
+          className={numToAlpha(i)} key={i} 
+          rowValues={row} 
+        />
+      )
     })
   }
 
+
+  // Fix this.. Selects proper element only if previously changed element is the first element
+  // To be changed
+  focusInput() {
+    if (document.querySelectorAll("td > input[value = '']").length >= 2) {
+      let input = document.querySelectorAll("td > input[value = '']:not([disabled])")[1];
+      input.focus()
+
+    }
+  }
+
   render() {
-    console.log(this.state)
+    this.focusInput()
+    if (checkPuzzle({puzzleObj: this.state.boardState, solution: this.props.solution})) {
+      return 'yes'
+    } else {
+      return (
+        <table id="board">
+          <tbody>
 
-    return (
-      <table id="board">
- 
-        {this.renderRows()}
+            {this.renderRows()}
+          </tbody>
+   
+        </table>
+      )
+    }
 
-      </table>
-    )
   }
 
 }
