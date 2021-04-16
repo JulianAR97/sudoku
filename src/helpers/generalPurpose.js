@@ -2,22 +2,29 @@ export const uniqueArr = arr => {
   arr.filter((v, i, a) => a.indexOf(v) === i)
 }
 
+export const addClass = (target, klass) => {
+  if (target.className.indexOf(klass) === -1 ) {
+    target.classList.add(klass)
+  }
+  return target
+}
+
+export const removeClass = (target, klass) => {
+  if (target.className.indexOf(klass) > - 1) {
+    target.classList.remove(klass)
+  }
+  return target;
+}
+
 export const redHighlighting = (targetAndCandidates) => {
   const {target, candidates} = targetAndCandidates
-  const className = target.className
-  const redInCN = (className) => className.indexOf('red') > -1 
 
-
-  if (candidates.indexOf(target.value) === -1 && !redInCN(className)) {
-    target.classList.add('red')
+  if (candidates.indexOf(target.value) === -1) {
+    addClass(target, 'red')
   } 
-  if (target.value === '' && redInCN(className)) {
-    target.classList.remove('red')
+  if (target.value === '') {
+    removeClass(target, 'red')
   }
 
   return target;
 }
-// 3 cases
-// 1 is that target val is '', which is when we remove highlightings
-// 2 is that target val is not in candidates and we add highlights
-// 3 is that target val 
