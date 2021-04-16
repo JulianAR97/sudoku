@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { getPuzzle } from './actions/puzzleActions'
 import DifficultySelect from './components/DifficultySelect'
+import Board from './containers/Board'
 import { connect } from 'react-redux'
 
 const difficulties = ['easy', 'medium', 'hard', 'very-hard', 'insane', 'inhuman']
@@ -12,7 +13,6 @@ class App extends Component{
   }
 
   render() {
-    debugger;
     if (!!!this.props.puzzle) {
       return (
         <div className="App">
@@ -24,7 +24,7 @@ class App extends Component{
     else {
       return (
         <div>
-          hello world
+          <Board />
         </div>
       )
     }
