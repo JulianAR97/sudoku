@@ -3,6 +3,7 @@
 const initialState = {
   puzzle: '',
   solution: '',
+  selected: false,
   puzzleArr: [],
   mutables: [],
   puzzleObj: {}
