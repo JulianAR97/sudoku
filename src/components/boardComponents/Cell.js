@@ -1,13 +1,22 @@
 import { connect } from 'react-redux'
 import { notMutable } from '../../helpers/gameHelpers'
 import { handleTDClick } from '../../helpers/generalPurpose'
+import { setCurrSelected } from '../../actions/puzzleActions'
 import '../../styles/board.css'
 
 const Cell = (props) => {
 
   const handleClick = (event) => {
-    handleTDClick(event)
-    event.target.classList.add('highlightGrey')
+    // debugger;
+    handleTDClick(event, props.currSelected)
+    
+    // This allows a user to add highlighting with a click
+    // and click it again to make it disappear
+    if (props.currSelected !== event.target.id) {
+      props.setCurrSelected(event.target.id)
+    } else {
+      props.setCurrSelected('')
+    }
   }
 
   if (notMutable({cell: props.inputID, mutables: props.mutables})) {
@@ -33,11 +42,12 @@ const Cell = (props) => {
 }
 
 const mapStateToProps = state => ({
-  mutables: state.mutables
+  mutables: state.mutables,
+  currSelected: state.currSelected
 })
 
 
-export default connect(mapStateToProps)(Cell)
+export default connect(mapStateToProps, {setCurrSelected})(Cell)
 
 // Todo:
 /*

@@ -3,7 +3,7 @@
 const initialState = {
   puzzle: '',
   solution: '',
-  selected: false,
+  currSelected: '',
   puzzleArr: [],
   mutables: [],
   puzzleObj: {}
@@ -19,6 +19,12 @@ const puzzleReducer = (state = initialState, action) => {
         puzzleArr: action.puzzleInfo.puzzleArr,
         puzzleObj: action.puzzleInfo.puzzleObj,
         mutables: action.puzzleInfo.mutables
+      }
+    
+    case 'SET_CURR_SELECTED':
+      return {
+        ...state,
+        currSelected: action.id
       }
     
     default: 

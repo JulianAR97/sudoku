@@ -29,5 +29,10 @@ export const getPuzzle = (difficulty) => {
   }
 }
 
+export const setCurrSelected = (id) => {
+  return dispatch => {
+    dispatch({type: 'SET_CURR_SELECTED', id})
+  }
+}
 
 
