@@ -33,3 +33,13 @@ const mapStateToProps = state => ({
 
 
 export default connect(mapStateToProps)(Cell)
+
+// Todo:
+/*
+Only allow numbers to be inputted;
+Select next available input
+Set selected to false
+Update state so that selected is true
+Set selected back to false when listening
+
+*/
