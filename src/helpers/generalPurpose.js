@@ -53,18 +53,12 @@ const removeClassesFromAll = (tag, klassList) => {
 
 
 export const handleTDClick = (event, currSelected) => {
-  removeClassesFromAll(event.target.tagName, ['highlightGrey', 'green'])
+  removeClassesFromAll(event.target.tagName, ['green'])
   if (event.target.id !== currSelected) {
-    const [letter, num] = event.target.id.split('')
     const value = event.target.value
-    const inputs = document.getElementsByTagName('input')
-    const inputsArr = [...inputs]
-    inputsArr.map(input => {
-      const [inpLetter, inpNum] = input.id.split('')
+    const inputs = [...document.getElementsByTagName('input')]
+    inputs.map(input => {
       const inpValue = input.value;
-      if (inpLetter === letter || inpNum === num) {
-        addClass(input, 'highlightGrey')
-      }
       if (value === inpValue) {
         addClass(input, 'green')
       }
