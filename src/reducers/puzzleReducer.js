@@ -4,6 +4,7 @@ const initialState = {
   puzzle: '',
   solution: '',
   currSelected: '',
+  mode: 'notes', // mode is either notes or input, notes for keeping track of possible inputs
   puzzleArr: [],
   mutables: [],
   puzzleObj: {}
@@ -25,6 +26,14 @@ const puzzleReducer = (state = initialState, action) => {
       return {
         ...state,
         currSelected: action.id
+      }
+    
+    // Switches mode from input to notes on button click
+    case 'SET_MODE':
+      let mode = state.mode === 'input' ? 'notes' : 'input'
+      return {
+        ...state,
+        mode
       }
     
     default: 

@@ -35,4 +35,9 @@ export const setCurrSelected = (id) => {
   }
 }
 
+export const setMode = () => {
+  return dispatch => {
+    dispatch({type: 'SET_MODE'})
+  }
+}
 
