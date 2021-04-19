@@ -3,7 +3,7 @@ const initialState = {
   solution: '',
   currSelected: '', // Refers to non-input cell
   inputSelected: '', // Refers to input cell
-  mode: 'notes', // mode is either notes or input, notes for keeping track of possible inputs
+  mode: 'input', // mode is either notes or input, notes for keeping track of possible inputs
   puzzleArr: [],
   mutables: [],
   puzzleObj: {},
