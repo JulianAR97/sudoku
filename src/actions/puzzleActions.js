@@ -29,15 +29,22 @@ export const getPuzzle = (difficulty) => {
   }
 }
 
-export const setCurrSelected = (id) => {
+export const setCurrSelected = (cellID) => {
   return dispatch => {
-    dispatch({type: 'SET_CURR_SELECTED', id})
+    dispatch({type: 'SET_CURR_SELECTED', cellID})
   }
 }
 
 export const setMode = () => {
   return dispatch => {
     dispatch({type: 'SET_MODE'})
+  }
+}
+
+// props should be {cellID, number}
+export const setCellNote = (props) => {
+  return dispatch => {
+    dispatch({type: 'SET_CELL_NOTE', props})
   }
 }
 
