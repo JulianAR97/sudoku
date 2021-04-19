@@ -44,20 +44,8 @@ class Board extends Component {
     })
   }
 
-
-  // Fix this.. Selects proper element only if previously changed element is the first element
-  // To be changed
-  focusInput() {
-    if (document.querySelectorAll("td > input[value = '']").length >= 2) {
-      let input = document.querySelectorAll("td > input[value = '']:not([disabled])")[1];
-      input.focus()
-
-    }
-  }
-
   render() {
 
-    this.focusInput()
     if (checkPuzzle({puzzleObj: this.state.boardState, solution: this.props.solution})) {
       return 'yes'
     } else {
