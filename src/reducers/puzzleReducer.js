@@ -1,9 +1,8 @@
-import { addOrRemoveFromArr } from '../helpers/generalPurpose'
-
 const initialState = {
   puzzle: '',
   solution: '',
-  currSelected: '',
+  currSelected: '', // Refers to non-input cell
+  inputSelected: '', // Refers to input cell
   mode: 'notes', // mode is either notes or input, notes for keeping track of possible inputs
   puzzleArr: [],
   mutables: [],
@@ -22,7 +21,6 @@ const puzzleReducer = (state = initialState, action) => {
         console.log(mute)
         cellNotes[mute] = []
       }
-      console.log(cellNotes)
 
       return {
         ...state,
@@ -49,14 +47,19 @@ const puzzleReducer = (state = initialState, action) => {
       }
     
     case 'SET_CELL_NOTE':
-      const {cellID, number} = action.props
-      const prevNoteArr = state.cellNotes[cellID]
-      let noteArr = addOrRemoveFromArr(prevNoteArr, number)
+      const {cellID, noteArr} = action.props
       return {
         ...state,
         cellNotes: {...state.cellNotes, [cellID]: noteArr}
       }
     
+    case 'SET_INPUT_SELECTED':
+      console.log(action.cellID)
+      return {
+        ...state,
+        inputSelected: action.cellID
+
+      }
     default: 
       return state;
   }

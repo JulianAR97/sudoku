@@ -41,10 +41,15 @@ export const setMode = () => {
   }
 }
 
-// props should be {cellID, number}
+// props should be {cellID, noteArr (array of numbers)}
 export const setCellNote = (props) => {
   return dispatch => {
     dispatch({type: 'SET_CELL_NOTE', props})
   }
 }
 
+export const setInputSelected = (cellID) => {
+  return dispatch => {
+    dispatch({type: 'SET_INPUT_SELECTED', cellID})
+  }
+}
