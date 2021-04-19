@@ -4,6 +4,8 @@ import Row from '../components/boardComponents/Row'
 import '../styles/board.css'
 import { puzzleObjToArr, numToAlpha, checkPuzzle, getCandidates } from '../helpers/gameHelpers'
 import { redHighlighting } from '../helpers/generalPurpose'
+import Button from '../components/Button'
+import { setMode } from '../actions/puzzleActions'
 
 
 class Board extends Component {
@@ -60,13 +62,17 @@ class Board extends Component {
       return 'yes'
     } else {
       return (
-        <table id="board">
-          <tbody>
+        <>
+          <table id="board">
+            <tbody>
 
-            {this.renderRows()}
-          </tbody>
-   
-        </table>
+              {this.renderRows()}
+            </tbody>
+    
+          </table>
+          <Button handleClick={this.props.setMode} text="notes" />
+        </>
+
       )
     }
 
@@ -79,4 +85,4 @@ const mapStateToProps = state => ({
   solution: state.solution
 })
 
-export default connect(mapStateToProps)(Board);
+export default connect(mapStateToProps, {setMode})(Board);
