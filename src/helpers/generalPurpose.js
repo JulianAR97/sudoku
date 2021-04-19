@@ -75,6 +75,7 @@ export const handleTDClick = (event, currSelected) => {
 
 export const addOrRemoveFromArr = (arr, ele) => {
   let idx = arr.indexOf(ele);
+
   if (idx > -1) {
     arr.splice(idx, 1);
     return arr;
