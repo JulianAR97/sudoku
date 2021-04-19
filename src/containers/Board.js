@@ -17,6 +17,11 @@ class Board extends Component {
     }
   }
 
+
+  getButtonStyle = () => {
+    return this.props.mode === 'notes' ? {backgroundColor: 'green'} : {backgroundColor: 'grey'}
+  }
+
   handleChange = (event) => {
     const candidates = getCandidates(this.state.boardState, event.target.id)
     redHighlighting({target: event.target, candidates})
@@ -58,7 +63,7 @@ class Board extends Component {
             </tbody>
     
           </table>
-          <Button handleClick={this.props.setMode} text="notes" />
+          <Button style={this.getButtonStyle()} handleClick={this.props.setMode} text="notes" />
         </>
 
       )
@@ -70,7 +75,8 @@ class Board extends Component {
 
 const mapStateToProps = state => ({
   puzzleObj: state.puzzleObj,
-  solution: state.solution
+  solution: state.solution,
+  mode: state.mode
 })
 
 export default connect(mapStateToProps, {setMode})(Board);
