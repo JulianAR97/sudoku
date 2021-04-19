@@ -1,22 +1,33 @@
 import '../../styles/board.css'
 
 const NoteTable = (props) => {
+  const cellNotes = props.cellNotes
+  console.log('cell notes:', cellNotes)
+  
+  const renderTD = (idx) => {
+    const className = cellNotes.indexOf(idx.toString()) > -1 ? 'notes' : 'notes hidden'
+    return (
+      <td className={className}>{idx}</td>
+    )
+  }
+  
+  
   return(
-    <table className="notes"style={{border: 'none', overflow: 'hidden', width: '100%'}}>
+    <table className="notes">
       <tr className="notes">
-        <td className="notes">1</td>
-        <td className="notes">2</td>
-        <td className="notes">3</td>
+        {renderTD(1)}
+        {renderTD(2)}
+        {renderTD(3)}
       </tr>
       <tr className="notes">
-        <td className="notes">4</td>
-        <td className="notes">5</td>
-        <td className="notes">6</td>
+        {renderTD(4)}
+        {renderTD(5)}
+        {renderTD(6)}
       </tr>
       <tr className="notes">
-        <td className="notes">7</td>
-        <td className="notes">8</td>
-        <td className="notes">9</td>
+        {renderTD(7)}
+        {renderTD(8)}
+        {renderTD(9)}
       </tr>
     </table>
   )
