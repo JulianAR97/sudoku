@@ -1,23 +1,25 @@
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown'
+import SudokuIcon from '../SudokuIcon.svg'
 
 const MyNav = () => {
   return (
-    <Navbar bg="dark" expand="lg">
-        <Navbar.Brand href="/">Test</Navbar.Brand>
+    <Navbar expand="sm" style={{backgroundColor: 'rgb(250, 212, 13)'}}>
+        <Navbar.Brand href="/">
+          <img
+            src={SudokuIcon}
+            width="40px"
+            height="40px"
+            className="d-inline-block align-top"
+            alt="Sudoku Logo"
+          />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown>
+          <Nav className="mr-auto" id="main-nav">
+            <Nav.Link href="/play">Play</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
+            <Nav.Link href="/help"></Nav.Link>
           </Nav>
         </Navbar.Collapse>
     </Navbar>
