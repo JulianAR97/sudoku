@@ -1,6 +1,7 @@
 #board {
   border: 2px solid #000000;
   border-spacing: 0;
+  margin: 25px auto;
 }
 
 .cell {
