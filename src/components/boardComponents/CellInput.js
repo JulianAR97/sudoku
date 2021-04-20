@@ -1,6 +1,12 @@
+import React, { useEffect } from 'react'
 import '../../styles/board.css'
 
-const CellInput = (props) => {
+export const CellInput = (props) => {
+
+  useEffect(() => {
+    document.getElementById(props.id).focus()
+  });
+
   return (
     <input 
       id={props.id} 
@@ -12,6 +18,7 @@ const CellInput = (props) => {
     />
 
   )
+
 }
 
 export default CellInput
