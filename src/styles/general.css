@@ -1,0 +1,10 @@
+.nav-link {
+  color: #fff
+}
+
+/* Need specific selectors to override bootstrap */
+
+#main-nav > a.nav-link {
+  color: pink
+}
+
