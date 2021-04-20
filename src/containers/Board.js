@@ -49,8 +49,8 @@ class Board extends Component {
     })
   }
 
-  render() {
 
+  render() {
     if (checkPuzzle({puzzleObj: this.state.boardState, solution: this.props.solution})) {
       return 'yes'
     } else {
