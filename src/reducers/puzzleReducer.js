@@ -18,7 +18,6 @@ const puzzleReducer = (state = initialState, action) => {
       
       for (let i = 0; i < mutables.length; i++) {
         let mute = mutables[i]
-        console.log(mute)
         cellNotes[mute] = []
       }
 
@@ -54,7 +53,6 @@ const puzzleReducer = (state = initialState, action) => {
       }
     
     case 'SET_INPUT_SELECTED':
-      console.log(action.cellID)
       return {
         ...state,
         inputSelected: action.cellID
