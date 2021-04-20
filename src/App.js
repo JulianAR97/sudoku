@@ -1,38 +1,20 @@
-import React, {Component} from 'react';
-import { getPuzzle } from './actions/puzzleActions'
-import DifficultySelect from './components/DifficultySelect'
-import Board from './containers/Board'
-import { connect } from 'react-redux'
+import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Play from './containers/Play'
 
-const difficulties = ['easy', 'medium', 'hard', 'very-hard', 'insane', 'inhuman']
 
-class App extends Component{
+const App = () => {
   
-  handleDifficultySelect = (e) => {
-    this.props.getPuzzle(e.target.value)
-  }
-
-  render() {
-    if (!!!this.props.puzzle) {
-      return (
-        <div className="App">
-          <DifficultySelect difficulties={difficulties} handleClick={this.handleDifficultySelect} />
-        </div>
-      );
-    }
-
-    else {
-      return (
-        <div>
-          <Board />
-        </div>
-      )
-    }
-  }
+  
+  return (
+    <Router>
+      <Switch>
+        <Route path="/play" >
+          <Play />
+        </Route>
+      </Switch>
+    </Router>
+  )
 }
 
-const mapStateToProps = state => ({
-  puzzle: state.puzzle
-})
-
-export default connect(mapStateToProps, {getPuzzle})(App);
+export default App;
