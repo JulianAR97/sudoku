@@ -21,7 +21,7 @@ const Cell = (props) => {
           id={props.inputID} 
           value={props.cellValue === '.' ? '' : props.cellValue} 
           disabled={false} 
-          handleChange={props.mode === 'input' ? props.handleChange : handleChange} 
+          handleChange={props.mode === 'input' ? props.handleChange : handleChange}
         />
       )
     } else {
