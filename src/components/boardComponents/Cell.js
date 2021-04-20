@@ -57,13 +57,13 @@ const Cell = (props) => {
 
   if (notMutable({cell: props.inputID, mutables: props.mutables})) {
     return (
-      <td className="cell" onClick={handleNonMutableClick}>
+      <td className={`cell ${props.inputID}`} onClick={handleNonMutableClick}>
         <CellInput id={props.inputID} value={props.cellValue} disabled={true} />
       </td>
     )
   } else {
     return (
-      <td className="cell" onClick={handleMutableClick}>
+      <td className={`cell ${props.inputID}`} onClick={handleMutableClick}>
         {renderTD()}
       </td>
     )
