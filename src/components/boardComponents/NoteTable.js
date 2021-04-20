@@ -2,7 +2,6 @@ import '../../styles/board.css'
 
 const NoteTable = (props) => {
   const cellNotes = props.cellNotes
-  console.log('cell notes:', cellNotes)
   
   const renderTD = (idx) => {
     const className = cellNotes.indexOf(idx.toString()) > -1 ? 'notes' : 'notes hidden'
