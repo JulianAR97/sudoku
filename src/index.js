@@ -9,13 +9,17 @@ import { createStore, applyMiddleware } from 'redux'
 import puzzleReducer from './reducers/puzzleReducer'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ThemeProvider } from '@material-ui/core/styles'
+import {theme} from './styles/theme'
 
 const store = createStore(puzzleReducer, composeWithDevTools(applyMiddleware(thunk)))
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store} >
-      <App />
-    </Provider>
+    <ThemeProvider theme={theme} >
+      <Provider store={store} >
+        <App />
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
