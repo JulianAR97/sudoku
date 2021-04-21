@@ -78,3 +78,11 @@ export const addOrRemoveFromArr = (arr, ele) => {
     return arr
   }
 }
+
+// Takes seconds '127' and returns stopwatch '02:07'
+export const stopWatch = (seconds) => {
+  const [mins, secs] = [Math.floor(seconds / 60), seconds % 60];
+  const minsString = mins < 10 ? `0${mins}` : `${mins}`;
+  const secsString = secs < 10 ? `0${secs}` : `${secs}`;
+  return `${minsString}:${secsString}`
+}
