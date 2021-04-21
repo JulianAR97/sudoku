@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { getPuzzle } from '../actions/puzzleActions'
 import DifficultySelect from '../components/DifficultySelect'
 import Board from './Board'
+import Timer from '../components/Timer'
 import { connect } from 'react-redux'
 
 const difficulties = ['easy', 'medium', 'hard', 'very-hard', 'insane', 'inhuman']
@@ -21,6 +22,7 @@ class Play extends Component {
     } else {
       return (
         <>
+          <Timer />
           <Board />
         </>
       )
