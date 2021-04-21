@@ -3,18 +3,18 @@ import Nav from 'react-bootstrap/Nav'
 import SudokuIcon from '../SudokuIcon.svg'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import GitHubIcon from '@material-ui/icons/GitHub'
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+// import { ThemeProvider } from '@material-ui/core/styles'
+// import {theme} from '../styles/theme'
 import '../styles/general.css' 
 
 
-const theme =createMuiTheme({
-  palette: {
-    secondary: {
-      main: '#ba7f9c'
-    }
-  }
-})
-
+// const theme = createMuiTheme({
+//   palette: {
+//     secondary: {
+//       main: '#ba7f9c'
+//     }
+//   }
+// })
 
 const MyNav = () => {
   return (
@@ -39,14 +39,18 @@ const MyNav = () => {
         </Navbar.Collapse>
 
         {/* Only set ml-auto of leftmost icon */}
-        <Navbar.Brand className="ml-auto">
-          <ThemeProvider theme={theme} >
-            <GitHubIcon color="secondary"/>
-          </ThemeProvider>
-
+        <Navbar.Brand 
+          href="https://github.com/JulianAR97/sudoku"
+          target="_blank"
+          className="ml-auto"
+        > 
+          <GitHubIcon color="secondary"/>
         </Navbar.Brand>
         
-        <Navbar.Brand>
+        <Navbar.Brand
+          href="https://linkedin.com/in/julian-a-rosenthal"
+          target="_blank"
+        >
           <LinkedInIcon color="secondary"/>
         </Navbar.Brand>
         
