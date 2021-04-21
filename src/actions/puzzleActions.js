@@ -53,3 +53,9 @@ export const setInputSelected = (cellID) => {
     dispatch({type: 'SET_INPUT_SELECTED', cellID})
   }
 }
+
+export const setCookie = (userUUID) => {
+  return dispatch => {
+    dispatch({type: 'SET_COOKIE', userUUID})
+  }
+}

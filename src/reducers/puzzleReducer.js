@@ -1,4 +1,5 @@
 const initialState = {
+  userUUID: '',
   puzzle: '',
   solution: '',
   currSelected: '', // Refers to non-input cell
@@ -58,6 +59,13 @@ const puzzleReducer = (state = initialState, action) => {
         inputSelected: action.cellID
 
       }
+
+    case 'SET_COOKIE':
+      return {
+        ...state,
+        userUUID: action.userUUID
+      }
+
     default: 
       return state;
   }
