@@ -1,6 +1,7 @@
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import SudokuIcon from '../SudokuIcon.svg'
+import '../styles/general.css' 
 
 const MyNav = () => {
   return (
