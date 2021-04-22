@@ -59,3 +59,15 @@ export const setCookie = (userUUID) => {
     dispatch({type: 'SET_COOKIE', userUUID})
   }
 }
+
+export const getScores = (userUUID) => {
+  console.log('here' + userUUID)
+  return dispatch => {
+    fetch(`http://localhost:3001/users/${userUUID}/scores`)
+      .then(resp => resp.json())
+      // JSON object that is returned looks like [0: {time: '23:45'}...9: {time: '34:56'}]
+      // So we map it to an array of only the values of the objects
+      .then(json => json.map(score => Object.values(score)[0]))
+      .then(scores => dispatch({type: "SET_SCORES", scores}))
+  }
+}
