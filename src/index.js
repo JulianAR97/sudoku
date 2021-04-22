@@ -8,6 +8,7 @@ import thunk from 'redux-thunk'
 import { createStore, applyMiddleware } from 'redux'
 import puzzleReducer from './reducers/puzzleReducer'
 import './index.css'
+import './styles/general.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ThemeProvider } from '@material-ui/core/styles'
 import {theme} from './styles/theme'
