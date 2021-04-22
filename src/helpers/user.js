@@ -10,3 +10,5 @@ export const findOrCreateCookie = () => {
     return document.cookie
   }
 }
+
+export const cookieID = (cookie) => cookie.split('=')[1]
