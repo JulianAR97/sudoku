@@ -151,4 +151,7 @@ export const findMissingNums = arr => {
   return rem;
 }
 
+export const getTime = () => {
+  return document.getElementsByClassName('timer')[0].innerHTML
+}
 
