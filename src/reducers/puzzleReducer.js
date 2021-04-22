@@ -1,6 +1,7 @@
 const initialState = {
   userUUID: '',
   puzzle: '',
+  difficulty: '',
   solution: '',
   currSelected: '', // Refers to non-input cell
   inputSelected: '', // Refers to input cell
@@ -29,6 +30,7 @@ const puzzleReducer = (state = initialState, action) => {
         solution: action.puzzleInfo.solution,
         puzzleArr: action.puzzleInfo.puzzleArr,
         puzzleObj: action.puzzleInfo.puzzleObj,
+        difficulty: action.puzzleInfo.difficulty,
         mutables,
         cellNotes
       }
