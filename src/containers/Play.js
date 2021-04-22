@@ -44,26 +44,31 @@ class Play extends Component {
         <Container>
           <Row>
             <Col lg={3}></Col>
-            <Col lg={6}>
+            
+            <Col lg={6} align="center">
               <Timer />
               <Board />
+              
               <Icon 
                 id="noteIcon" 
                 icon={noteLine} 
                 color="#fad30d" 
-                style={{backgroundColor: this.getNoteIconColor(), cursor: 'hand'}}
+                style={{backgroundColor: this.getNoteIconColor(), cursor: 'hand', marginRight: '10px'}}
                 fontSize="40px" 
                 onClick={this.handleIconClick} 
               />
+
               <Icon 
                 id="eraserIcon" 
                 icon={eraser20Filled} 
                 color="#ba7f9c"
-                style={{cursor: 'hand'}}
+                style={{cursor: 'hand', marginLeft: '10px'}}
                 fontSize="40px"
                 onClick={this.handleIconClick} 
               />
+
             </Col>
+            
             <Col lg={3}></Col>
           </Row>
 
