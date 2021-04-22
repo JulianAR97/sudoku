@@ -21,8 +21,10 @@ const Play = (props) => {
     }
   })
 
-  const difficulties = ['easy', 'medium', 'hard', 'very-hard', 'insane', 'inhuman'] 
+  const difficulties = ['easy', 'medium', 'hard', 'expert'] 
   const noteIconColor = props.mode === 'notes' ? '#5bb786' : 'inherit'
+  
+  const handleDifficultySelect = (e) => props.getPuzzle(e.target.value)
   
   const handleIconClick = (e) => {
     
@@ -34,7 +36,6 @@ const Play = (props) => {
 
   }
 
-  const handleDifficultySelect = (e) => props.getPuzzle(e.target.value)
 
   const renderBoardOrDifficulty = () => {
     
