@@ -4,8 +4,6 @@ import Row from '../components/boardComponents/Row'
 import '../styles/board.css'
 import { puzzleObjToArr, numToAlpha, checkPuzzle, getCandidates } from '../helpers/gameHelpers'
 import { redHighlighting } from '../helpers/generalPurpose'
-import Button from '../components/Button'
-import { setMode, setCellNote } from '../actions/puzzleActions'
 
 
 class Board extends Component {
@@ -63,8 +61,6 @@ class Board extends Component {
             </tbody>
     
           </table>
-          <Button style={this.getButtonStyle()} handleClick={this.props.setMode} text="notes" />
-          <Button handleClick={() => this.props.setCellNote({cellID: this.props.inputSelected, noteArr: []})} text="erase"/>
         </>
 
       )
@@ -81,4 +77,4 @@ const mapStateToProps = state => ({
   inputSelected: state.inputSelected
 })
 
-export default connect(mapStateToProps, {setMode, setCellNote})(Board);
+export default connect(mapStateToProps)(Board);
