@@ -4,6 +4,8 @@ import Row from '../components/boardComponents/Row'
 import '../styles/board.css'
 import { puzzleObjToArr, numToAlpha, checkPuzzle, getCandidates } from '../helpers/gameHelpers'
 import { redHighlighting } from '../helpers/generalPurpose'
+import { postScore } from '../helpers/user'
+import { getTime } from '../helpers/gameHelpers'
 
 
 class Board extends Component {
@@ -13,11 +15,6 @@ class Board extends Component {
     this.state = {
       boardState: this.props.puzzleObj,
     }
-  }
-
-
-  getButtonStyle = () => {
-    return this.props.mode === 'notes' ? {backgroundColor: 'green'} : {backgroundColor: 'grey'}
   }
 
   handleChange = (event) => {
@@ -50,7 +47,7 @@ class Board extends Component {
 
   render() {
     if (checkPuzzle({puzzleObj: this.state.boardState, solution: this.props.solution})) {
-      return 'yes'
+      postScore(getTime(), this.props.userUUID )
     } else {
       return (
         <>
@@ -74,7 +71,8 @@ const mapStateToProps = state => ({
   puzzleObj: state.puzzleObj,
   solution: state.solution,
   mode: state.mode,
-  inputSelected: state.inputSelected
+  inputSelected: state.inputSelected,
+  userUUID: state.userUUID,
 })
 
 export default connect(mapStateToProps)(Board);
