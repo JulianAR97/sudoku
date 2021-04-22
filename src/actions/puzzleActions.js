@@ -61,7 +61,6 @@ export const setCookie = (userUUID) => {
 }
 
 export const getScores = (userUUID) => {
-  console.log('here' + userUUID)
   return dispatch => {
     fetch(`http://localhost:3001/users/${userUUID}/scores`)
       .then(resp => resp.json())
@@ -71,3 +70,4 @@ export const getScores = (userUUID) => {
       .then(scores => dispatch({type: "SET_SCORES", scores}))
   }
 }
+
