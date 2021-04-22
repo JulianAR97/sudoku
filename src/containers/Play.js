@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
@@ -11,61 +11,70 @@ import Timer from '../components/Timer'
 import { setMode, setCellNote } from '../actions/puzzleActions'
 
 
-const difficulties = ['easy', 'medium', 'hard', 'very-hard', 'insane', 'inhuman']
 
-class Play extends Component {
+const Play = (props) => {
   
-  getNoteIconColor = () => {
-    return this.props.mode === 'notes' ? '#5bb786' : 'inherit'
+  const difficulties = ['easy', 'medium', 'hard', 'very-hard', 'insane', 'inhuman']
+  const getNoteIconColor = () => {
+    return props.mode === 'notes' ? '#5bb786' : 'inherit'
   }
   
-  handleIconClick = (e) => {
+  const handleIconClick = (e) => {
     if (e.target.id === 'noteIcon') {
-      this.props.setMode();
+      props.setMode();
     } else {
       console.log(e.target.id)
-      this.props.setCellNote({cellID: this.props.inputSelected, noteArr: []})
+      props.setCellNote({cellID: props.inputSelected, noteArr: []})
     }
   }
 
-  handleDifficultySelect = (e) => {
-    this.props.getPuzzle(e.target.value)
+  const handleDifficultySelect = (e) => {
+    props.getPuzzle(e.target.value)
   }
 
-  renderBoardOrDifficulty = () => {
+  const renderBoardOrDifficulty = () => {
     
-    if (this.props.puzzle === '') {
+    if (props.puzzle === '') {
       return (
-        <DifficultySelect difficulties={difficulties} handleClick={this.handleDifficultySelect} />
+        <DifficultySelect difficulties={difficulties} handleClick={handleDifficultySelect} />
       )   
     } else {
     
       return (
-        <Container>
+        <>
+          <Timer />
+          <Board />
+          
+          <Icon 
+            id="noteIcon" 
+            icon={noteLine} 
+            color="#fad30d" 
+            style={{backgroundColor: getNoteIconColor(), cursor: 'hand', marginRight: '10px'}}
+            fontSize="40px" 
+            onClick={handleIconClick} 
+          />
+
+          <Icon 
+            id="eraserIcon" 
+            icon={eraser20Filled} 
+            color="#ba7f9c"
+            style={{cursor: 'hand', marginLeft: '10px'}}
+            fontSize="40px"
+            onClick={handleIconClick} 
+          />
+        </>
+      )
+    }
+  }
+
+    
+    return (
+      <Container>
           <Row>
             <Col lg={3}></Col>
             
             <Col lg={6} align="center">
-              <Timer />
-              <Board />
-              
-              <Icon 
-                id="noteIcon" 
-                icon={noteLine} 
-                color="#fad30d" 
-                style={{backgroundColor: this.getNoteIconColor(), cursor: 'hand', marginRight: '10px'}}
-                fontSize="40px" 
-                onClick={this.handleIconClick} 
-              />
-
-              <Icon 
-                id="eraserIcon" 
-                icon={eraser20Filled} 
-                color="#ba7f9c"
-                style={{cursor: 'hand', marginLeft: '10px'}}
-                fontSize="40px"
-                onClick={this.handleIconClick} 
-              />
+              {renderBoardOrDifficulty()}
 
             </Col>
             
@@ -73,20 +82,8 @@ class Play extends Component {
           </Row>
 
         </Container>
-      )
-    }
-  }
-
-
-
-  render() {
-    
-    return (
-      <>
-        { this.renderBoardOrDifficulty() }
-      </>
     )
-  }
+  
 }
 
 const mapStateToProps = state => ({
