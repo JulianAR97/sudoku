@@ -1,19 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
 import eraser20Filled from '@iconify-icons/fluent/eraser-20-filled'
 import noteLine from '@iconify-icons/clarity/note-line'
-import { getPuzzle } from '../actions/puzzleActions'
-import DifficultySelect from '../components/DifficultySelect'
 import Board from './Board'
+import DifficultySelect from '../components/DifficultySelect'
+import ScoreBoard from '../components/ScoreBoard'
 import Timer from '../components/Timer'
-import { setMode, setCellNote } from '../actions/puzzleActions'
+import { getPuzzle } from '../actions/puzzleActions'
+import { setMode, setCellNote, getScores } from '../actions/puzzleActions'
 
 
 
 const Play = (props) => {
   
+  useEffect(() => {
+    if (props.userUUID) {
+      props.getScores(props.userUUID)
+    }
+  })
+
   const difficulties = ['easy', 'medium', 'hard', 'very-hard', 'insane', 'inhuman'] 
   const noteIconColor = props.mode === 'notes' ? '#5bb786' : 'inherit'
   
@@ -65,18 +72,20 @@ const Play = (props) => {
   }
 
   return (
-    <Container>
-      <Row>
-        <Col lg={3}></Col>
+    <Container className="fh"> 
+      <Row className="fh">
+        
+        <Col lg={3} align="center">
+          <ScoreBoard />
+        </Col>
           
-        <Col lg={6} align="center">
+        <Col lg={6} align="center" justifyContent="center">
           {renderBoardOrDifficulty()}
         </Col>
           
         <Col lg={3}></Col>
         
       </Row>
-
     </Container>
   )
   
@@ -85,9 +94,10 @@ const Play = (props) => {
 const mapStateToProps = state => ({
   puzzle: state.puzzle,
   mode: state.mode,
-  inputSelected: state.inputSelected
+  inputSelected: state.inputSelected,
+  userUUID: state.userUUID
 })
 
-export default connect(mapStateToProps, {getPuzzle, setMode, setCellNote})(Play);
+export default connect(mapStateToProps, {getPuzzle, setMode, setCellNote, getScores})(Play);
 
 // Change from class component to using hooks
