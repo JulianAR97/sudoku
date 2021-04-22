@@ -14,23 +14,20 @@ import { setMode, setCellNote } from '../actions/puzzleActions'
 
 const Play = (props) => {
   
-  const difficulties = ['easy', 'medium', 'hard', 'very-hard', 'insane', 'inhuman']
-  const getNoteIconColor = () => {
-    return props.mode === 'notes' ? '#5bb786' : 'inherit'
-  }
+  const difficulties = ['easy', 'medium', 'hard', 'very-hard', 'insane', 'inhuman'] 
+  const noteIconColor = props.mode === 'notes' ? '#5bb786' : 'inherit'
   
   const handleIconClick = (e) => {
+    
     if (e.target.id === 'noteIcon') {
       props.setMode();
     } else {
-      console.log(e.target.id)
       props.setCellNote({cellID: props.inputSelected, noteArr: []})
     }
+
   }
 
-  const handleDifficultySelect = (e) => {
-    props.getPuzzle(e.target.value)
-  }
+  const handleDifficultySelect = (e) => props.getPuzzle(e.target.value)
 
   const renderBoardOrDifficulty = () => {
     
@@ -49,7 +46,7 @@ const Play = (props) => {
             id="noteIcon" 
             icon={noteLine} 
             color="#fad30d" 
-            style={{backgroundColor: getNoteIconColor(), cursor: 'hand', marginRight: '10px'}}
+            style={{backgroundColor: noteIconColor, cursor: 'hand', marginRight: '10px'}}
             fontSize="40px" 
             onClick={handleIconClick} 
           />
@@ -67,22 +64,21 @@ const Play = (props) => {
     }
   }
 
-    
-    return (
-      <Container>
-          <Row>
-            <Col lg={3}></Col>
-            
-            <Col lg={6} align="center">
-              {renderBoardOrDifficulty()}
+  return (
+    <Container>
+      <Row>
+        <Col lg={3}></Col>
+          
+        <Col lg={6} align="center">
+          {renderBoardOrDifficulty()}
+        </Col>
+          
+        <Col lg={3}></Col>
+        
+      </Row>
 
-            </Col>
-            
-            <Col lg={3}></Col>
-          </Row>
-
-        </Container>
-    )
+    </Container>
+  )
   
 }
 
