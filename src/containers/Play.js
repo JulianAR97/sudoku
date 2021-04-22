@@ -16,7 +16,7 @@ const difficulties = ['easy', 'medium', 'hard', 'very-hard', 'insane', 'inhuman'
 class Play extends Component {
   
   getNoteIconColor = () => {
-    return this.props.mode === 'notes' ? {backgroundColor: 'green'} : {backgroundColor: 'grey'}
+    return this.props.mode === 'notes' ? '#5bb786' : 'inherit'
   }
   
   handleIconClick = (e) => {
@@ -47,8 +47,22 @@ class Play extends Component {
             <Col lg={6}>
               <Timer />
               <Board />
-              <Icon id="noteIcon" onClick={this.handleIconClick} icon={noteLine} color="#fad30d" backgroundColor="green" fontSize="40px" />
-              <Icon id="eraserIcon" onClick={this.handleIconClick} icon={eraser20Filled} color="#ba7f9c" fontSize="40px"/>
+              <Icon 
+                id="noteIcon" 
+                icon={noteLine} 
+                color="#fad30d" 
+                style={{backgroundColor: this.getNoteIconColor(), cursor: 'hand'}}
+                fontSize="40px" 
+                onClick={this.handleIconClick} 
+              />
+              <Icon 
+                id="eraserIcon" 
+                icon={eraser20Filled} 
+                color="#ba7f9c"
+                style={{cursor: 'hand'}}
+                fontSize="40px"
+                onClick={this.handleIconClick} 
+              />
             </Col>
             <Col lg={3}></Col>
           </Row>
