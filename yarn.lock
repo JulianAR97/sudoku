@@ -1221,6 +1221,26 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@iconify-icons/clarity@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@iconify-icons/clarity/-/clarity-1.1.0.tgz#d6b7f5ad2d19b1da00075c24143562e40c2c62c0"
+  integrity sha512-/Xhva35u6lE/hwel97H+jdCJBrcZZhQ4HXOY7JtzOsf5kQc/x6+bcmm6DU43iucV8yBsJPOcalIrALZdeHRSwA==
+
+"@iconify-icons/fluent@^1.1.11":
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/@iconify-icons/fluent/-/fluent-1.1.11.tgz#a96cae8d2f50eb289e2746d8a26bd089ce6e6fdb"
+  integrity sha512-ybAv6pz3fHf5R3JHtC8Ocov4fs+NvVC88noI9FDD9NvDXxcTFJCTII1PzmI+z+SCfAkiIS7nDlO0Q0DJnm7s/Q==
+
+"@iconify-icons/foundation@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@iconify-icons/foundation/-/foundation-1.1.0.tgz#f684cf5f9faabfee64b9f09b07e10661023a31db"
+  integrity sha512-ogPIL//stfnYJqq9ntEj07CvFWB+YHDSud9SkHKGaVl5dVv0jy896KcVlmQ3510+JzRa9zLuCfInnDdiOZdOxg==
+
+"@iconify/react@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@iconify/react/-/react-1.1.4.tgz#c778eddbaf196e55705d0bedff00d039dc1de8d3"
+  integrity sha512-oxq8IMOq8q3nKGiDHbQPC8FcFuBsKve68JWBo140d5LRnj0bv5TB/FE/y01ZSvEZ7PlI2HIrnb2qivPN8kTDgw==
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz"
