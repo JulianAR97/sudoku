@@ -7,6 +7,7 @@ const initialState = {
   mode: 'input', // mode is either notes or input, notes for keeping track of possible inputs
   puzzleArr: [],
   mutables: [],
+  scores: [],
   puzzleObj: {},
   cellNotes: {}
 }
@@ -64,6 +65,12 @@ const puzzleReducer = (state = initialState, action) => {
       return {
         ...state,
         userUUID: action.userUUID
+      }
+
+    case 'SET_SCORES':
+      return {
+        ...state,
+        scores: action.scores
       }
 
     default: 
