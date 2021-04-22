@@ -2,6 +2,7 @@ export const generatePuzzle = (difficulty) => {
   const seed = selectPuzzle(difficulty);
   const conversion = numberMap();
   const mapped = mapAndConvertToStrings(seed, conversion);
+  debugger;
   const transposed = transpose(mapped);
   return transpose(transposed)
 
@@ -46,6 +47,7 @@ const mapAndConvertToStrings = (array, conversion) => {
       array[i][j] === 0 ? array[i][j] = '.' : array[i][j] = conversion[array[i][j]].toString()
     }
   }
+  return array;
 }
 
 const selectPuzzle = (difficulty) => {
