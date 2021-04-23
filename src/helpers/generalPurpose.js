@@ -29,7 +29,7 @@ export const redHighlighting = (targetAndCandidates) => {
   return target;
 }
 
-const removeClassFromAll = (tag, klass) => {
+export const removeClassFromAll = (tag, klass) => {
   const elements = document.getElementsByTagName(tag);
   const eleArr = [...elements];
   eleArr.map(ele => {
@@ -91,3 +91,15 @@ export const empty = (object) => {
   return Object.keys(object).length === 0
 }
 
+
+export const greenHighlighting = (currSelected) => {
+  const cell = document.getElementById(currSelected)
+  removeClassesFromAll(cell.tagName, ['green'])
+  const inputs = [...document.getElementsByTagName('input')]
+  inputs.map(input => {
+    if (input.value === cell.value) {
+      addClass(input, 'green')
+    }
+    return input;
+  })
+}

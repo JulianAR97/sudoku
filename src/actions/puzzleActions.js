@@ -2,6 +2,7 @@
 import SudokuToolCollection from 'sudokutoolcollection'
 import { generatePuzzle } from '../helpers/sudokuHelper'
 import { findMutables } from '../helpers/gameHelpers'
+import { removeClassFromAll } from '../helpers/generalPurpose'
 
 
 const sudoku = SudokuToolCollection();
@@ -31,6 +32,7 @@ export const getPuzzle = (difficulty) => {
 }
 
 export const setCurrSelected = (cellID) => {
+  if (!!cellID) { removeClassFromAll('input', 'green')}
   return dispatch => {
     dispatch({type: 'SET_CURR_SELECTED', cellID})
   }

@@ -10,7 +10,7 @@ import ScoreBoard from '../components/ScoreBoard'
 import Timer from '../components/Timer'
 import { getPuzzle, setMode, setCellNote, getScores, resetPuzzle } from '../actions/puzzleActions'
 import { puzzleObjToArr, checkPuzzle, getCandidates, getTime, boardStateShouldUpdate, difficulties } from '../helpers/gameHelpers'
-import { redHighlighting, empty } from '../helpers/generalPurpose'
+import { redHighlighting, greenHighlighting, empty } from '../helpers/generalPurpose'
 import { postScore } from '../helpers/user'
 
 // returns true or false
@@ -31,6 +31,11 @@ const Play = (props) => {
     if (props.userUUID && !props.scores.length) {
       props.getScores(props.userUUID)
     }
+
+    if (!!props.currSelected) {
+      greenHighlighting(props.currSelected)
+    }
+
   }, [boardState, props])
 
   
@@ -126,6 +131,7 @@ const mapStateToProps = state => ({
   mode: state.mode,
   scores: state.scores,
   inputSelected: state.inputSelected,
+  currSelected: state.currSelected,
   userUUID: state.userUUID
 })
 
