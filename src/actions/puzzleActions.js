@@ -72,3 +72,8 @@ export const getScores = (userUUID) => {
   }
 }
 
+export const resetPuzzle = () => {
+  return dispatch => {
+    dispatch({type: 'RESET_PUZZLE'})
+  }
+}

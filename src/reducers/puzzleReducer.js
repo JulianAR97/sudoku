@@ -74,6 +74,21 @@ const puzzleReducer = (state = initialState, action) => {
         ...state,
         scores: action.scores
       }
+    
+    case 'RESET_PUZZLE':
+      return {
+        ...state,
+        puzzle: '',
+        difficulty: '',
+        solution: '',
+        currSelected: '',
+        mode: 'input',
+        puzzleArr: [],
+        mutables: [],
+        scores: [],
+        puzzleObj: {},
+        cellNotes: {}
+      }
 
     default: 
       return state;
