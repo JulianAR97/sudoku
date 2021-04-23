@@ -1,4 +1,5 @@
 import SudokuToolCollection from 'sudokutoolcollection'
+import { empty } from './generalPurpose'
 const sudoku = SudokuToolCollection();
 
 const conversion = {
@@ -155,3 +156,8 @@ export const getTime = () => {
   return document.getElementsByClassName('timer')[0].innerHTML
 }
 
+export const boardStateShouldUpdate = (localBoardState, reduxBoardState) => {
+  return (empty(localBoardState) && !empty(reduxBoardState))
+}
+
+export const difficulties = ['easy', 'medium', 'hard', 'expert'] 

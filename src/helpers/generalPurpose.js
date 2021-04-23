@@ -86,3 +86,8 @@ export const stopWatch = (seconds) => {
   const secsString = secs < 10 ? `0${secs}` : `${secs}`;
   return `${minsString}:${secsString}`
 }
+
+export const empty = (object) => {
+  return Object.keys(object).length === 0
+}
+

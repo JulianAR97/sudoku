@@ -10,24 +10,17 @@ import ScoreBoard from '../components/ScoreBoard'
 import Timer from '../components/Timer'
 import { getPuzzle } from '../actions/puzzleActions'
 import { setMode, setCellNote, getScores } from '../actions/puzzleActions'
-import { puzzleObjToArr, checkPuzzle, getCandidates, getTime } from '../helpers/gameHelpers'
-import { redHighlighting } from '../helpers/generalPurpose'
+import { puzzleObjToArr, checkPuzzle, getCandidates, getTime, boardStateShouldUpdate, difficulties } from '../helpers/gameHelpers'
+import { redHighlighting, empty } from '../helpers/generalPurpose'
 import { postScore } from '../helpers/user'
 
 // returns true or false
 // Move to helper file
-const empty = (object) => {
-  return Object.keys(object).length === 0
-}
 
-const boardStateShouldUpdate = (localBoardState, reduxBoardState) => {
-  return (empty(localBoardState) && !empty(reduxBoardState))
-}
 
 const Play = (props) => {
   
   const [boardState, setBoardState] = useState(props.puzzleObj)
-  const difficulties = ['easy', 'medium', 'hard', 'expert'] 
   const noteIconColor = props.mode === 'notes' ? '#5bb786' : 'inherit'
   const puzzleArr = puzzleObjToArr(boardState)
 
@@ -109,7 +102,7 @@ const Play = (props) => {
       <Row className="fh">
         
         <Col lg={3} align="center">
-          <ScoreBoard />
+          <ScoreBoard scores={props.scores}/>
         </Col>
           
         <Col lg={6} align="center" justifyContent="center">
