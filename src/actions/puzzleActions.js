@@ -69,6 +69,7 @@ export const getScores = (userUUID) => {
       // So we map it to an array of only the values of the objects
       .then(json => json.map(score => Object.values(score)[0]))
       .then(scores => dispatch({type: "SET_SCORES", scores}))
+      .catch(() => dispatch({type: "SET_SCORES", scores: [null]}))
   }
 }
 
