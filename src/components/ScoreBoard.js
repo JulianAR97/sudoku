@@ -4,7 +4,11 @@ import React from 'react';
 const ScoreBoard = (props) => {
   
   const renderScores = (scores) => {
-    return scores.map(score => <p>{score}</p>)  
+    if (scores[0] === null) {
+      return <p>No scores to display...</p>
+    } else {
+      return scores.map(score => <p>{score}</p>)  
+    }
   }
 
   return (
