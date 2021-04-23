@@ -10,7 +10,7 @@ import ScoreBoard from '../components/ScoreBoard'
 import Timer from '../components/Timer'
 import { getPuzzle, setMode, setCellNote, getScores, resetPuzzle } from '../actions/puzzleActions'
 import { puzzleObjToArr, checkPuzzle, getCandidates, getTime, boardStateShouldUpdate, difficulties } from '../helpers/gameHelpers'
-import { redHighlighting, greenHighlighting, empty } from '../helpers/generalPurpose'
+import { redHighlighting, greenHighlighting, empty, removeClassFromAll } from '../helpers/generalPurpose'
 import { postScore } from '../helpers/user'
 
 // returns true or false
@@ -34,6 +34,8 @@ const Play = (props) => {
 
     if (!!props.currSelected) {
       greenHighlighting(props.currSelected)
+    } else {
+      removeClassFromAll('input', 'green')
     }
 
   }, [boardState, props])

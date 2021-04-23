@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { notMutable } from '../../helpers/gameHelpers'
-import { handleTDClick } from '../../helpers/generalPurpose'
 import { setCurrSelected, setInputSelected, setCellNote } from '../../actions/puzzleActions'
 import NoteTable from './NoteTable'
 import '../../styles/board.css'
@@ -11,7 +10,6 @@ const Cell = (props) => {
 
   const cellNotes = props.cellNotes[props.inputID] 
 
-  
   const renderTD = () => {
     // If the current selected cell is this instance of cell, or if the cell has a value 
     if (props.inputSelected === props.inputID || !!Number(props.cellValue)) {
@@ -44,10 +42,6 @@ const Cell = (props) => {
   }
   
   const handleNonMutableClick = (event) => {
-    handleTDClick(event, props.currSelected)
-    
-    // This allows a user to add highlighting with a click
-    // and click it again to make it disappear
     if (props.currSelected !== event.target.id) {
       props.setCurrSelected(event.target.id)
     } else {
