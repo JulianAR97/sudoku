@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux'
+
+
 const ScoreBoard = (props) => {
   
   const renderScores = (scores) => {
@@ -16,10 +17,5 @@ const ScoreBoard = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    scores: state.scores
-  }
-}
 
-export default connect(mapStateToProps)(ScoreBoard)
+export default ScoreBoard
