@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import { Container, Row, Col } from 'react-bootstrap';
 import { Icon } from '@iconify/react';
@@ -10,19 +10,47 @@ import ScoreBoard from '../components/ScoreBoard'
 import Timer from '../components/Timer'
 import { getPuzzle } from '../actions/puzzleActions'
 import { setMode, setCellNote, getScores } from '../actions/puzzleActions'
+import { puzzleObjToArr, checkPuzzle, getCandidates, getTime } from '../helpers/gameHelpers'
+import { redHighlighting } from '../helpers/generalPurpose'
+import { postScore } from '../helpers/user'
 
+// returns true or false
+// Move to helper file
+const empty = (object) => {
+  return Object.keys(object).length === 0
+}
 
+const boardStateShouldUpdate = (localBoardState, reduxBoardState) => {
+  return (empty(localBoardState) && !empty(reduxBoardState))
+}
 
 const Play = (props) => {
   
-  useEffect(() => {
-    if (props.userUUID) {
-      props.getScores(props.userUUID)
-    }
-  })
-
+  const [boardState, setBoardState] = useState(props.puzzleObj)
   const difficulties = ['easy', 'medium', 'hard', 'expert'] 
   const noteIconColor = props.mode === 'notes' ? '#5bb786' : 'inherit'
+  const puzzleArr = puzzleObjToArr(boardState)
+
+  useEffect(() => {
+    if (boardStateShouldUpdate(boardState, props.puzzleObj)) {
+      setBoardState(props.puzzleObj)
+    }
+    if (props.userUUID && !props.scores.length) {
+      props.getScores(props.userUUID)
+    }
+  }, [boardState, props])
+
+  
+  const handleChange = (event) => {
+    const target = event.target
+    const key = target.id
+    const value = target.value || '.'
+    const candidates = getCandidates(boardState, key)
+    
+    redHighlighting({target, candidates})
+    setBoardState({ ...boardState, [key]: value })
+  }
+
   
   const handleDifficultySelect = (e) => props.getPuzzle(e.target.value)
   
@@ -39,16 +67,20 @@ const Play = (props) => {
 
   const renderBoardOrDifficulty = () => {
     
-    if (props.puzzle === '') {
+    if (empty(props.puzzleObj)) {
       return (
         <DifficultySelect difficulties={difficulties} handleClick={handleDifficultySelect} />
       )   
     } else {
-    
+
+      if (checkPuzzle({puzzleObj: boardState, solution: props.solution})) {
+        postScore(getTime(), props.userUUID)
+      } 
+
       return (
         <>
           <Timer />
-          <Board />
+          <Board handleChange={handleChange} puzzleArr={puzzleArr}/>
           
           <Icon 
             id="noteIcon" 
@@ -93,8 +125,10 @@ const Play = (props) => {
 }
 
 const mapStateToProps = state => ({
-  puzzle: state.puzzle,
+  puzzleObj: state.puzzleObj,
+  solution: state.solution,
   mode: state.mode,
+  scores: state.scores,
   inputSelected: state.inputSelected,
   userUUID: state.userUUID
 })
