@@ -8,8 +8,7 @@ import Board from './Board'
 import DifficultySelect from '../components/DifficultySelect'
 import ScoreBoard from '../components/ScoreBoard'
 import Timer from '../components/Timer'
-import { getPuzzle } from '../actions/puzzleActions'
-import { setMode, setCellNote, getScores } from '../actions/puzzleActions'
+import { getPuzzle, setMode, setCellNote, getScores, resetPuzzle } from '../actions/puzzleActions'
 import { puzzleObjToArr, checkPuzzle, getCandidates, getTime, boardStateShouldUpdate, difficulties } from '../helpers/gameHelpers'
 import { redHighlighting, empty } from '../helpers/generalPurpose'
 import { postScore } from '../helpers/user'
@@ -28,6 +27,7 @@ const Play = (props) => {
     if (boardStateShouldUpdate(boardState, props.puzzleObj)) {
       setBoardState(props.puzzleObj)
     }
+    console.log(`props length ${props.scores.length}, props: ${props.scores}`)
     if (props.userUUID && !props.scores.length) {
       props.getScores(props.userUUID)
     }
@@ -68,6 +68,7 @@ const Play = (props) => {
 
       if (checkPuzzle({puzzleObj: boardState, solution: props.solution})) {
         postScore(getTime(), props.userUUID)
+        props.resetPuzzle()
       } 
 
       return (
@@ -97,19 +98,21 @@ const Play = (props) => {
     }
   }
 
+  // When defining breakpoints, it starts at smallest, and then continues until next defined
+  // So xs will apply for sm and md as well
   return (
     <Container className="fh"> 
       <Row className="fh">
         
-        <Col lg={3} align="center">
+        <Col xs={{span: 12, order: 2}} lg={{span: 3, order: 1}} align="center">
           <ScoreBoard scores={props.scores}/>
         </Col>
           
-        <Col lg={6} align="center" justifyContent="center">
+        <Col xs={{span: 12, order: 1}} lg={{span: 6, order: 2}} align="center" justifyContent="center">
           {renderBoardOrDifficulty()}
         </Col>
           
-        <Col lg={3}></Col>
+        <Col xs={{span: 12, order: 3}} lg={{span: 3, order: 3}}></Col>
         
       </Row>
     </Container>
@@ -126,6 +129,6 @@ const mapStateToProps = state => ({
   userUUID: state.userUUID
 })
 
-export default connect(mapStateToProps, {getPuzzle, setMode, setCellNote, getScores})(Play);
+export default connect(mapStateToProps, {getPuzzle, setMode, setCellNote, getScores, resetPuzzle})(Play);
 
 // Change from class component to using hooks
