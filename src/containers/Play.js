@@ -27,7 +27,7 @@ const Play = (props) => {
     if (boardStateShouldUpdate(boardState, props.puzzleObj)) {
       setBoardState(props.puzzleObj)
     }
-    console.log(`props length ${props.scores.length}, props: ${props.scores}`)
+    
     if (props.userUUID && !props.scores.length) {
       props.getScores(props.userUUID)
     }

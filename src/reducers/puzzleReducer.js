@@ -70,9 +70,10 @@ const puzzleReducer = (state = initialState, action) => {
       }
 
     case 'SET_SCORES':
+      const scores = !action.scores.length ? [null] : action.scores
       return {
         ...state,
-        scores: action.scores
+        scores
       }
     
     case 'RESET_PUZZLE':
