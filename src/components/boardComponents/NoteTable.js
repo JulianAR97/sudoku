@@ -12,7 +12,7 @@ const NoteTable = (props) => {
   
   
   return(
-    <table className="notes">
+    <table className="notes" >
       <tr className="notes">
         {renderTD(1)}
         {renderTD(2)}

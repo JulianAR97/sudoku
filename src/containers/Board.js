@@ -8,7 +8,7 @@ const Board = (props) => {
     return props.puzzleArr.map((row, i) => {
       return (
         <Row 
-          handleChange={props.handleChange} 
+          handleKeyDown={props.handleKeyDown} 
           className={numToAlpha(i)} key={i} 
           rowValues={row} 
         />

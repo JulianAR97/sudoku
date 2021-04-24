@@ -1,3 +1,4 @@
+import React from 'react';
 import { connect } from 'react-redux'
 import { notMutable } from '../../helpers/gameHelpers'
 import { setCurrSelected, setInputSelected, setCellNote } from '../../actions/puzzleActions'
@@ -7,9 +8,10 @@ import CellInput from './CellInput'
 import {addOrRemoveFromArr} from '../../helpers/generalPurpose'
 
 const Cell = (props) => {
+  
 
   const cellNotes = props.cellNotes[props.inputID] 
-
+  
   const renderTD = () => {
     // If the current selected cell is this instance of cell, or if the cell has a value 
     if (props.inputSelected === props.inputID || !!Number(props.cellValue)) {
@@ -25,7 +27,9 @@ const Cell = (props) => {
     } else {
       // Otherwise we return notes
       return (
-        <NoteTable cellNotes={cellNotes}/>
+        <NoteTable 
+          cellNotes={cellNotes} 
+        />
       )
     }
   }
@@ -51,13 +55,26 @@ const Cell = (props) => {
 
   if (notMutable({cell: props.inputID, mutables: props.mutables})) {
     return (
-      <td className={`cell ${props.inputID}`} onClick={handleNonMutableClick}>
-        <CellInput id={props.inputID} value={props.cellValue} disabled={true} />
+      <td 
+        className={`cell ${props.inputID}`} 
+        onClick={handleNonMutableClick}
+      >
+        <CellInput 
+          id={props.inputID} 
+          value={props.cellValue} 
+          disabled={true} 
+        />
       </td>
     )
   } else {
     return (
-      <td className={`cell ${props.inputID}`} onClick={handleMutableClick}>
+      <td 
+        className={`cell ${props.inputID}`} 
+        onClick={handleMutableClick} 
+        onKeyDown={props.handleKeyDown} 
+        // tab index indicates element can be focused
+        tabIndex="0"
+      >
         {renderTD()}
       </td>
     )

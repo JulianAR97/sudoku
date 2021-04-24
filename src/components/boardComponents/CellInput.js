@@ -8,14 +8,15 @@ export const CellInput = (props) => {
   });
 
   return (
-    <input 
+    <div
       id={props.id} 
       type="text" 
       maxLength="1" 
       value={props.value} 
       disabled={props.disabled}
-      onChange={props.handleChange}
-    />
+    >
+      {props.value}
+    </div>
 
   )
 

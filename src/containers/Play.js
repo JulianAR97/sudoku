@@ -41,12 +41,22 @@ const Play = (props) => {
   }, [boardState, props])
 
   
-  const handleChange = (event) => {
-    const target = event.target
-    const key = target.id
-    const value = target.value || '.'
-    const candidates = getCandidates(boardState, key)
+  const handleKeyDown = (event) => {
+    const key = props.inputSelected
+    const target = document.getElementById(key)
+    const keyVal = event.key
     
+    // Create an array [1..9] and return if keyval is not in there
+    if (!Array.from(Array(10).keys()).slice(1).includes(Number(keyVal)) && keyVal !== 'Backspace') {
+      return 
+    }
+
+    const value = keyVal === 'Backspace' ? '.' : keyVal
+    
+    
+    
+    const candidates = getCandidates(boardState, key)
+
     redHighlighting({target, candidates})
     setBoardState({ ...boardState, [key]: value })
   }
@@ -81,7 +91,7 @@ const Play = (props) => {
       return (
         <>
           <Timer />
-          <Board handleChange={handleChange} puzzleArr={puzzleArr}/>
+          <Board handleKeyDown={handleKeyDown} puzzleArr={puzzleArr}/>
           
           <Icon 
             id="noteIcon" 
