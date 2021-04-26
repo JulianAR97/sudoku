@@ -8,7 +8,7 @@ import Board from './Board'
 import DifficultySelect from '../components/DifficultySelect'
 import ScoreBoard from '../components/ScoreBoard'
 import Timer from '../components/Timer'
-import { getPuzzle, setMode, setCellNote, getStats, resetPuzzle } from '../actions/puzzleActions'
+import { getPuzzle, setMode, setCellNote, getStats, resetPuzzle, sendScore } from '../actions/puzzleActions'
 import { puzzleObjToArr, checkPuzzle, getCandidates, getTime, boardStateShouldUpdate, difficulties } from '../helpers/gameHelpers'
 import { redHighlighting, greenHighlighting, empty, removeClassFromAll } from '../helpers/generalPurpose'
 import StatsBoard from '../components/StatsBoard';
@@ -23,7 +23,7 @@ const Play = (props) => {
   const [boardState, setBoardState] = useState(props.puzzleObj)
   const noteIconColor = props.mode === 'notes' ? '#5bb786' : 'inherit'
   const puzzleArr = puzzleObjToArr(boardState)
-
+  
   useEffect(() => {
     if (boardStateShouldUpdate(boardState, props.puzzleObj)) {
       setBoardState(props.puzzleObj)
@@ -32,11 +32,17 @@ const Play = (props) => {
     if (props.userID && empty(props.stats)) {
       props.getStats(props.userID)
     }
-
+    
     if (!!props.currSelected) {
       greenHighlighting(props.currSelected)
     } else {
-      removeClassFromAll('input', 'green')
+      removeClassFromAll('td', 'green')
+    }
+
+    if (props.solution && checkPuzzle({puzzleObj: boardState, solution: props.solution})) {
+      let time = getTime()
+      console.log('time: ', time)
+      props.sendScore({userID: props.userID, time, difficulty: props.difficulty})
     }
 
   }, [boardState, props])
@@ -112,6 +118,7 @@ const Play = (props) => {
     }
   }
 
+
   // When defining breakpoints, it starts at smallest, and then continues until next defined
   // So xs will apply for sm and md as well
   return (
@@ -147,6 +154,6 @@ const mapStateToProps = state => ({
   userID: state.userID,
 })
 
-export default connect(mapStateToProps, {getPuzzle, setMode, setCellNote, getStats, resetPuzzle})(Play);
+export default connect(mapStateToProps, {getPuzzle, setMode, setCellNote, getStats, resetPuzzle, sendScore})(Play);
 
 // Change from class component to using hooks
