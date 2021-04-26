@@ -94,7 +94,7 @@ export const empty = (object) => {
 
 export const greenHighlighting = (currSelected) => {
   const cell = document.getElementById(currSelected)
-  removeClassesFromAll(cell.tagName, ['green'])
+  removeClassFromAll(cell.tagName, ['green'])
   const cells = [...document.getElementsByClassName('cell')]
   cells.map(c => {
     if (c.innerText === cell.innerText) {

@@ -57,7 +57,7 @@
   color: red;
 }
 
-.cell > input.green {
+.cell.green {
   color: green;
   font-weight: bold;
   background-color: rgba(0, 128, 0, .25)
