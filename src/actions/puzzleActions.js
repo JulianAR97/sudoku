@@ -86,3 +86,20 @@ export const resetPuzzle = () => {
     dispatch({type: 'RESET_PUZZLE'})
   }
 }
+
+export const sendScore = (props) => {
+  const {userID, time, difficulty} = props
+  return dispatch => {
+    fetch(`http://localhost:3001/users/${userID}/scores`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({time, difficulty})
+    })
+      .then(resp => resp.json())
+      .then(json => dispatch({type: 'RESET_PUZZLE'}))
+
+  }
+}

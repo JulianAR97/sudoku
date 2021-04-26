@@ -82,6 +82,7 @@ const puzzleReducer = (state = initialState, action) => {
         difficulty: '',
         solution: '',
         currSelected: '',
+        inputSelected: '',
         mode: 'input',
         puzzleArr: [],
         mutables: [],
