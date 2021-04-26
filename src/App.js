@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { setCookie } from './actions/puzzleActions'
+import { getUser } from './actions/puzzleActions'
 import { findOrCreateCookie, cookieID } from './helpers/user'
 import Play from './containers/Play'
 import MyNav from './components/MyNav'
@@ -9,8 +9,8 @@ import MyNav from './components/MyNav'
 const App = (props) => {
   
   useEffect(() => {
-    const userUUID = cookieID(findOrCreateCookie());
-    props.setCookie(userUUID)
+    const cookie = cookieID(findOrCreateCookie());
+    props.getUser(cookie)
   })
 
   return (
@@ -27,4 +27,4 @@ const App = (props) => {
   )
 }
 
-export default connect(null, {setCookie})(App);
+export default connect(null, {getUser})(App);
