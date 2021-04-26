@@ -40,10 +40,6 @@ const Cell = (props) => {
     props.setCellNote({cellID: props.inputID, noteArr: newNotes})
     props.setInputSelected('')
   }
-
-  const handleMutableClick = (event) => {
-    props.setInputSelected(props.inputID)
-  }
   
   const handleNonMutableClick = (event) => {
     if (props.currSelected !== event.target.id) {
@@ -70,7 +66,7 @@ const Cell = (props) => {
     return (
       <td 
         className={`cell ${props.inputID}`} 
-        onClick={handleMutableClick} 
+        onClick={() => props.setInputSelected(props.inputID)} 
         onKeyDown={props.handleKeyDown} 
         // tab index indicates element can be focused
         tabIndex="0"
