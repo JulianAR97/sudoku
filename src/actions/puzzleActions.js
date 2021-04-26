@@ -17,6 +17,22 @@ Difficulty levels:
 
 Can also generate a specific number of squares by passing in an integer as an argument
 */
+
+export const getUser = (cookie) => {
+  return dispatch => {
+
+    fetch('http://localhost:3001/users', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({cookie})
+    })
+      .then(resp => resp.json())
+      .then(userID => dispatch({type: "SET_USER_ID", userID: userID['id']}))
+  }
+  }
 export const getPuzzle = (difficulty) => {
   // puzzle will be string of numbers with null squares being '.' ex: '1..2..8..4...3'
   const puzzleArr = generatePuzzle(difficulty);
@@ -55,21 +71,13 @@ export const setInputSelected = (cellID) => {
   }
 }
 
-export const setCookie = (userUUID) => {
+export const getStats = (userID) => {
   return dispatch => {
-    dispatch({type: 'SET_COOKIE', userUUID})
-  }
-}
-
-export const getScores = (userUUID) => {
-  return dispatch => {
-    fetch(`http://localhost:3001/users/${userUUID}/scores`)
+    fetch(`http://localhost:3001/users/${userID}/stats`)
       .then(resp => resp.json())
       // JSON object that is returned looks like [0: {time: '23:45'}...9: {time: '34:56'}]
       // So we map it to an array of only the values of the objects
-      .then(json => json.map(score => Object.values(score)[0]))
-      .then(scores => dispatch({type: "SET_SCORES", scores}))
-      .catch(() => dispatch({type: "SET_SCORES", scores: [null]}))
+      .then(stats => dispatch({type: "SET_STATS", stats}))
   }
 }
 
