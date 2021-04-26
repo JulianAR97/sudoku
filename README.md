@@ -17,4 +17,4 @@ This project will be hosted soon, but for now, you can test it by doing the foll
   * Get candidates function for a particular sudoku cell
 
 ## Important!
-**The default port for the rails server is 3001 because this project runs on port 3000.  If you need to change the backend port for any reason, you must also change the port for all of the fetch calls in the actions directory of the this project**
+**The default port for the rails server is 3001 because this project runs on port 3000.  If you need to change the backend port for any reason, you must also change the port for all of the fetch calls in the actions directory of this project**
