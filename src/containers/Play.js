@@ -8,10 +8,11 @@ import Board from './Board'
 import DifficultySelect from '../components/DifficultySelect'
 import ScoreBoard from '../components/ScoreBoard'
 import Timer from '../components/Timer'
-import { getPuzzle, setMode, setCellNote, getScores, resetPuzzle } from '../actions/puzzleActions'
+import { getPuzzle, setMode, setCellNote, getStats, resetPuzzle } from '../actions/puzzleActions'
 import { puzzleObjToArr, checkPuzzle, getCandidates, getTime, boardStateShouldUpdate, difficulties } from '../helpers/gameHelpers'
 import { redHighlighting, greenHighlighting, empty, removeClassFromAll } from '../helpers/generalPurpose'
-import { postScore } from '../helpers/user'
+import StatsBoard from '../components/StatsBoard';
+
 
 // returns true or false
 // Move to helper file
@@ -28,8 +29,8 @@ const Play = (props) => {
       setBoardState(props.puzzleObj)
     }
     
-    if (props.userUUID && !props.scores.length) {
-      props.getScores(props.userUUID)
+    if (props.userID && empty(props.stats)) {
+      props.getStats(props.userID)
     }
 
     if (!!props.currSelected) {
@@ -53,12 +54,13 @@ const Play = (props) => {
 
     const value = keyVal === 'Backspace' ? '.' : keyVal
     
-    
-    
-    const candidates = getCandidates(boardState, key)
+    if (props.mode === 'input') {
+      const candidates = getCandidates(boardState, key)
+      redHighlighting({target, candidates})
+      setBoardState({ ...boardState, [key]: value })
+    } else {
 
-    redHighlighting({target, candidates})
-    setBoardState({ ...boardState, [key]: value })
+    }
   }
 
   
@@ -82,11 +84,6 @@ const Play = (props) => {
         <DifficultySelect difficulties={difficulties} handleClick={handleDifficultySelect} />
       )   
     } else {
-
-      if (checkPuzzle({puzzleObj: boardState, solution: props.solution})) {
-        postScore(getTime(), props.userUUID)
-        props.resetPuzzle()
-      } 
 
       return (
         <>
@@ -122,14 +119,16 @@ const Play = (props) => {
       <Row className="fh">
         
         <Col xs={{span: 12, order: 2}} lg={{span: 3, order: 1}} align="center">
-          <ScoreBoard scores={props.scores}/>
+          <ScoreBoard stats={props.stats} difficulty={props.difficulty}/>
         </Col>
           
         <Col xs={{span: 12, order: 1}} lg={{span: 6, order: 2}} align="center" justifyContent="center">
           {renderBoardOrDifficulty()}
         </Col>
           
-        <Col xs={{span: 12, order: 3}} lg={{span: 3, order: 3}}></Col>
+        <Col xs={{span: 12, order: 3}} lg={{span: 3, order: 3}}>
+          <StatsBoard stats={props.stats} />
+        </Col>
         
       </Row>
     </Container>
@@ -140,13 +139,14 @@ const Play = (props) => {
 const mapStateToProps = state => ({
   puzzleObj: state.puzzleObj,
   solution: state.solution,
+  difficulty: state.difficulty,
   mode: state.mode,
-  scores: state.scores,
+  stats: state.stats,
   inputSelected: state.inputSelected,
   currSelected: state.currSelected,
-  userUUID: state.userUUID
+  userID: state.userID,
 })
 
-export default connect(mapStateToProps, {getPuzzle, setMode, setCellNote, getScores, resetPuzzle})(Play);
+export default connect(mapStateToProps, {getPuzzle, setMode, setCellNote, getStats, resetPuzzle})(Play);
 
 // Change from class component to using hooks
