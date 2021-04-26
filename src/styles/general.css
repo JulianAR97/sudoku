@@ -9,3 +9,6 @@
   height: 100%;
 }
 
+div.smlh > p {
+  line-height: 70%
+}
