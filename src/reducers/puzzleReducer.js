@@ -1,5 +1,5 @@
 const initialState = {
-  userUUID: '',
+  userID: null,
   puzzle: '',
   difficulty: '',
   solution: '',
@@ -8,7 +8,7 @@ const initialState = {
   mode: 'input', // mode is either notes or input, notes for keeping track of possible inputs
   puzzleArr: [],
   mutables: [],
-  scores: [],
+  stats: {},
   puzzleObj: {},
   cellNotes: {}
 }
@@ -63,17 +63,16 @@ const puzzleReducer = (state = initialState, action) => {
 
       }
 
-    case 'SET_COOKIE':
+    case 'SET_USER_ID':
       return {
         ...state,
-        userUUID: action.userUUID
+        userID: action.userID
       }
 
-    case 'SET_SCORES':
-      const scores = !action.scores.length ? [null] : action.scores
+    case 'SET_STATS':
       return {
         ...state,
-        scores
+        stats: action.stats
       }
     
     case 'RESET_PUZZLE':
@@ -86,7 +85,7 @@ const puzzleReducer = (state = initialState, action) => {
         mode: 'input',
         puzzleArr: [],
         mutables: [],
-        scores: [],
+        stats: {},
         puzzleObj: {},
         cellNotes: {}
       }
