@@ -103,3 +103,7 @@ export const greenHighlighting = (currSelected) => {
     return input;
   })
 }
+
+export const titleize = string => {
+  return string.split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')
+}
