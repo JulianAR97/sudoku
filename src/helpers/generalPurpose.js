@@ -16,13 +16,13 @@ export const removeClass = (target, klass) => {
   return target;
 }
 
-export const redHighlighting = (targetAndCandidates) => {
-  const {target, candidates} = targetAndCandidates
+export const redHighlighting = (props) => {
+  const {target, candidates, value} = props
 
-  if (candidates.indexOf(target.value) === -1) {
+  if (candidates.indexOf(value) === -1) {
     addClass(target, 'red')
   } 
-  if (target.value === '') {
+  if (value === '.') {
     removeClass(target, 'red')
   }
 

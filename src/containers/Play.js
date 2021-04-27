@@ -59,13 +59,16 @@ const Play = (props) => {
     }
 
     const value = keyVal === 'Backspace' ? '.' : keyVal
+    const candidates = getCandidates(boardState, key)
     
     if (props.mode === 'input') {
-      const candidates = getCandidates(boardState, key)
-      redHighlighting({target, candidates})
+      redHighlighting({target, candidates, value})
       setBoardState({ ...boardState, [key]: value })
     } else {
-
+      let notes = [...props.cellNotes[key], keyVal]
+      // ES6 to get unique array
+      const uniq = [...new Set(notes)];
+      props.setCellNote({cellID: key, noteArr: uniq})
     }
   }
 
@@ -152,6 +155,7 @@ const mapStateToProps = state => ({
   inputSelected: state.inputSelected,
   currSelected: state.currSelected,
   userID: state.userID,
+  cellNotes: state.cellNotes,
 })
 
 export default connect(mapStateToProps, {getPuzzle, setMode, setCellNote, getStats, resetPuzzle, sendScore})(Play);
