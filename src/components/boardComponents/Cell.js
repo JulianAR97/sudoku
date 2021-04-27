@@ -9,7 +9,6 @@ import {addOrRemoveFromArr} from '../../helpers/generalPurpose'
 
 const Cell = (props) => {
   
-
   const cellNotes = props.cellNotes[props.inputID] 
   
   const renderTD = () => {
@@ -52,7 +51,8 @@ const Cell = (props) => {
   if (notMutable({cell: props.inputID, mutables: props.mutables})) {
     return (
       <td 
-        className={`cell ${props.inputID}`} 
+        id={props.inputID}
+        className="cell"
         onClick={handleNonMutableClick}
       >
         <CellInput 
@@ -65,9 +65,10 @@ const Cell = (props) => {
   } else {
     return (
       <td 
-        className={`cell ${props.inputID}`} 
-        onClick={() => props.setInputSelected(props.inputID)} 
-        onKeyDown={props.handleKeyDown} 
+        id={props.inputID}
+        className="cell" 
+        onKeyDown={props.handleKeyDown}
+        onFocus={() => props.setInputSelected(props.inputID)}
         // tab index indicates element can be focused
         tabIndex="0"
       >
