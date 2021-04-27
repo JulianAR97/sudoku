@@ -107,3 +107,16 @@ export const greenHighlighting = (currSelected) => {
 export const titleize = string => {
   return string.split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')
 }
+
+export const removeDupe = array => {
+  let sorted = array.sort();
+
+  for (let i = 1; i < sorted.length; i++) {
+    if (sorted[i - 1] === sorted[i]) {
+      sorted.splice(i - 1, 2)
+      return sorted
+    }
+  }
+  return sorted
+  
+}
