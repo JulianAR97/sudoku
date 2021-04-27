@@ -2,7 +2,15 @@ import React from 'react';
 import {empty, titleize} from '../helpers/generalPurpose'
 
 const StatsBoard = (props) => {
-  let {stats} = props
+  const {stats} = props
+  const topTens = stats.topTenByDifficulty
+  
+  const topTimes = {}
+    for (const k in topTens) {
+      console.log(k)
+      console.log(topTens)
+      topTimes[k] = topTens[k][0] || 'No Times'
+  }
   
   
   const renderCategory = (category) => {
@@ -16,6 +24,8 @@ const StatsBoard = (props) => {
   
   const renderStats = () => {
     if (!empty(stats)) {
+      
+  
       return (
         <>
           <h5>Average Times:</h5>
@@ -23,12 +33,14 @@ const StatsBoard = (props) => {
           <br />
           <h5>Completed Games: </h5>
           {renderCategory(stats.totalsByDifficulty)}
-
+          <br />
+          <h5>Top Times: </h5>
+          {renderCategory(topTimes)}
         </>
    
       )
     } else {
-      return <p>'No stats to display...'</p>
+      return <p>No stats to display...</p>
     }
   }
 
