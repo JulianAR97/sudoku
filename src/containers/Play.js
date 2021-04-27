@@ -30,26 +30,36 @@ const Play = (props) => {
       props.getStats(props.userID)
     }
     
+    // If there is a currently selected cell, add green highlighting
     if (!!props.currSelected) {
       greenHighlighting(props.currSelected)
     } else {
+    // Otherwise, the cell is deselected, and we need to remove the green highlighting
       removeClassFromAll('td', 'green')
     }
 
+    // If the game is completed, we need to check for accuracy
     if (props.solution && checkPuzzle({puzzleObj: boardState, solution: props.solution})) {
+      // Then get the time from our timer
       let time = getTime()
+      // Then send the score to the backend
       props.sendScore({userID: props.userID, time, difficulty: props.difficulty})
     }
 
-  }, [boardState, props])
+  }, [boardState, props]) // This is a dependency array which you need for useEffect
 
+
+  // This is now innapropriately named, but is used to check whether the board state is empty but the puzzleObj
+  // From redux is not
   if (boardStateShouldUpdate(boardState, props.puzzleObj)) {
     setBoardState(props.puzzleObj)
   }
 
+
   const handleKeyDown = (event) => {
     const key = props.inputSelected
     const target = document.getElementById(key)
+    // keyVal is the actual keypress
     const keyVal = event.key
     
     // Create an array [1..9] and return if keyval is not in there
@@ -57,6 +67,8 @@ const Play = (props) => {
       return 
     }
 
+    // map 'Backspace key to '.' which is default 'null' value 
+    // otherwise keyVal will be between 1 and 9
     const value = keyVal === 'Backspace' ? '.' : keyVal
     const candidates = getCandidates(boardState, key)
     
@@ -74,6 +86,7 @@ const Play = (props) => {
 
   
   const handleDifficultySelect = (e) => props.getPuzzle(e.target.value)
+  
   
   const handleIconClick = (e) => {
     
@@ -132,11 +145,11 @@ const Play = (props) => {
           <ScoreBoard stats={props.stats} difficulty={props.difficulty}/>
         </Col>
           
-        <Col xs={{span: 12, order: 1}} lg={{span: 6, order: 2}} align="center" justifyContent="center">
+        <Col xs={{span: 12, order: 1}} lg={{span: 6, order: 2}} align="center">
           {renderBoardOrDifficulty()}
         </Col>
           
-        <Col xs={{span: 12, order: 3}} lg={{span: 3, order: 3}}>
+        <Col xs={{span: 12, order: 3}} lg={{span: 3, order: 3}} align="center">
           <StatsBoard stats={props.stats} />
         </Col>
         
