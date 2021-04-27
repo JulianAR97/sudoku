@@ -9,7 +9,6 @@ export const CellInput = (props) => {
 
   return (
     <div
-      id={props.id} 
       type="text" 
       maxLength="1" 
       value={props.value} 
