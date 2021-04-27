@@ -32,8 +32,6 @@ const Cell = (props) => {
     }
   }
 
-
-  
   const handleNonMutableClick = (event) => {
     if (props.currSelected !== event.target.id) {
       props.setCurrSelected(event.target.id)
@@ -63,9 +61,10 @@ const Cell = (props) => {
         className="cell mutable" 
         onKeyDown={props.handleKeyDown}
         onClick={() => props.setInputSelected(props.inputID)}
-        // onFocus={() => props.setInputSelected(props.inputID)}
+        // onFocus={props.setInputSelected(props.inputID)}
         // tab index indicates element can be focused
         tabIndex={1}
+        autoFocus={props.inputID === props.inputSelected}
       >
         {renderTD()}
       </td>
