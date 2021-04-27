@@ -10,7 +10,7 @@ import ScoreBoard from '../components/ScoreBoard'
 import Timer from '../components/Timer'
 import { getPuzzle, setMode, setCellNote, getStats, resetPuzzle, sendScore } from '../actions/puzzleActions'
 import { puzzleObjToArr, checkPuzzle, getCandidates, getTime, boardStateShouldUpdate, difficulties } from '../helpers/gameHelpers'
-import { redHighlighting, greenHighlighting, empty, removeClassFromAll } from '../helpers/generalPurpose'
+import { redHighlighting, greenHighlighting, empty, removeClassFromAll, removeDupe } from '../helpers/generalPurpose'
 import StatsBoard from '../components/StatsBoard';
 
 
@@ -77,10 +77,12 @@ const Play = (props) => {
       redHighlighting({target, candidates, value})
       setBoardState({ ...boardState, [key]: value })
     } else {
-      let notes = [...props.cellNotes[key], keyVal]
+      let notes = keyVal === 'Backspace' ? [] : [...props.cellNotes[key], keyVal]
       // ES6 to get unique array
-      const uniq = [...new Set(notes)];
-      props.setCellNote({cellID: key, noteArr: uniq})
+      // const uniq = [...new Set(notes)];
+
+      const diff = removeDupe(notes)
+      props.setCellNote({cellID: key, noteArr: diff})
     }
   }
 
