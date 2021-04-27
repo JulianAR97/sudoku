@@ -162,3 +162,13 @@ export const boardStateShouldUpdate = (localBoardState, reduxBoardState) => {
 }
 
 export const difficulties = ['easy', 'medium', 'hard', 'expert'] 
+
+export const getNextKey = (key) => {
+  const mutables = [...document.getElementsByClassName('mutable')]
+  const ids = mutables.map(m => m.id)
+  for (let i = 0; i < ids.length; i++) {
+    if (ids[i] === key) {
+      return ids[i + 1] ? ids[i + 1] : ids[0]
+    }
+  }
+}

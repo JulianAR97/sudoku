@@ -8,8 +8,8 @@ import Board from './Board'
 import DifficultySelect from '../components/DifficultySelect'
 import ScoreBoard from '../components/ScoreBoard'
 import Timer from '../components/Timer'
-import { getPuzzle, setMode, setCellNote, getStats, resetPuzzle, sendScore } from '../actions/puzzleActions'
-import { puzzleObjToArr, checkPuzzle, getCandidates, getTime, boardStateShouldUpdate, difficulties } from '../helpers/gameHelpers'
+import { getPuzzle, setMode, setCellNote, getStats, resetPuzzle, sendScore, setInputSelected } from '../actions/puzzleActions'
+import { puzzleObjToArr, checkPuzzle, getCandidates, getTime, boardStateShouldUpdate, difficulties, getNextKey } from '../helpers/gameHelpers'
 import { redHighlighting, greenHighlighting, empty, removeClassFromAll, removeDupe } from '../helpers/generalPurpose'
 import StatsBoard from '../components/StatsBoard';
 
@@ -62,9 +62,16 @@ const Play = (props) => {
     // keyVal is the actual keypress
     const keyVal = event.key
     
-    // Create an array [1..9] and return if keyval is not in there
-    if (!Array.from(Array(10).keys()).slice(1).includes(Number(keyVal)) && keyVal !== 'Backspace') {
+    const goodKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'Backspace', 'Tab']
+    
+    if (!goodKeys.includes(keyVal)) {
       return 
+    }
+
+    if (keyVal === 'Tab') {
+      const nextKey = getNextKey(key)
+      props.setInputSelected(nextKey);
+      return;
     }
 
     // map 'Backspace key to '.' which is default 'null' value 
@@ -173,6 +180,6 @@ const mapStateToProps = state => ({
   cellNotes: state.cellNotes,
 })
 
-export default connect(mapStateToProps, {getPuzzle, setMode, setCellNote, getStats, resetPuzzle, sendScore})(Play);
+export default connect(mapStateToProps, {getPuzzle, setMode, setCellNote, getStats, resetPuzzle, sendScore, setInputSelected})(Play);
 
 // Change from class component to using hooks
