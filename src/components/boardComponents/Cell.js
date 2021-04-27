@@ -65,7 +65,7 @@ const Cell = (props) => {
         onClick={() => props.setInputSelected(props.inputID)}
         // onFocus={() => props.setInputSelected(props.inputID)}
         // tab index indicates element can be focused
-        tabIndex="0"
+        tabIndex={1}
       >
         {renderTD()}
       </td>

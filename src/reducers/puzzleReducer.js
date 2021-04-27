@@ -51,7 +51,6 @@ const puzzleReducer = (state = initialState, action) => {
     
     case 'SET_CELL_NOTE':
       const {cellID, noteArr} = action.props
-      debugger;
       return {
         ...state,
         cellNotes: {...state.cellNotes, [cellID]: noteArr}

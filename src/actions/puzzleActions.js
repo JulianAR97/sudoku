@@ -34,7 +34,7 @@ export const getUser = (cookie) => {
   }
   }
 export const getPuzzle = (difficulty) => {
-  // puzzle will be string of numbers with null squares being '.' ex: '1..2..8..4...3'
+  // puzzle will be matrix with '.' as null values
   const puzzleArr = generatePuzzle(difficulty);
   const puzzle = sudoku.conversions.gridToString(puzzleArr);
   const solution = sudoku.solver.solve(puzzle);
@@ -60,7 +60,6 @@ export const setMode = () => {
 
 // props should be {cellID, noteArr (array of numbers)}
 export const setCellNote = (props) => {
-  debugger;
   return dispatch => {
     dispatch({type: 'SET_CELL_NOTE', props})
   }
