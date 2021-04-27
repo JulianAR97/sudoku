@@ -4,12 +4,10 @@ import {empty, titleize} from '../helpers/generalPurpose'
 const StatsBoard = (props) => {
   const {stats} = props
   const topTens = stats.topTenByDifficulty
-  
   const topTimes = {}
-    for (const k in topTens) {
-      console.log(k)
-      console.log(topTens)
-      topTimes[k] = topTens[k][0] || 'No Times'
+  
+  for (const k in topTens) {
+    topTimes[k] = topTens[k][0] || 'No Times'
   }
   
   
