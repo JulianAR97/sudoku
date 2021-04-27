@@ -60,6 +60,7 @@ export const setMode = () => {
 
 // props should be {cellID, noteArr (array of numbers)}
 export const setCellNote = (props) => {
+  debugger;
   return dispatch => {
     dispatch({type: 'SET_CELL_NOTE', props})
   }

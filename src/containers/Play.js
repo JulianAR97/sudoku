@@ -61,6 +61,8 @@ const Play = (props) => {
     const candidates = getCandidates(boardState, key)
     
     if (props.mode === 'input') {
+      debugger;
+      props.setCellNote({cellID: key, noteArr: []})
       redHighlighting({target, candidates, value})
       setBoardState({ ...boardState, [key]: value })
     } else {
