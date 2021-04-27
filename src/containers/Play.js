@@ -98,11 +98,11 @@ const Play = (props) => {
   
   
   const handleIconClick = (e) => {
-    
+    const inpSel = props.inputSelected
     if (e.target.id === 'noteIcon') {
       props.setMode();
     } else {
-      props.setCellNote({cellID: props.inputSelected, noteArr: []})
+      props.mode === 'notes' ? props.setCellNote({cellID: inpSel, noteArr: []}) : setBoardState({...boardState, [inpSel]: '.'})
     }
 
   }
