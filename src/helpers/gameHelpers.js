@@ -64,8 +64,9 @@ export const checkPuzzle = (puzzle) => {
 
 // Build own get candidates function 
 // Because the one with sudoku doesn't work
-export const getCandidates = (puzzleObj, cell) => {;
-  let puzzleArr = puzzleObjToArr(puzzleObj);
+export const getCandidates = (puzzleObj, cell) => {
+  let cellRemoved = {...puzzleObj, [cell]: '.'}
+  let puzzleArr = puzzleObjToArr(cellRemoved);
   let [rowAlpha, col] = cell.split('');
   let rowIdx = alphaToNum(rowAlpha);
   let colIdx = col - 1

@@ -8,7 +8,7 @@ const ScoreBoard = (props) => {
     if (!scores[0]) {
       return <p>No scores to display...</p>
     } else {
-      return scores.map(score => <p>{score}</p>)  
+      return scores.map((score, i) => <p key={i}>{score}</p>)  
     }
   }
 

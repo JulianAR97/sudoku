@@ -5,40 +5,34 @@ import { setCurrSelected, setInputSelected, setCellNote } from '../../actions/pu
 import NoteTable from './NoteTable'
 import '../../styles/board.css'
 import CellInput from './CellInput'
-import {addOrRemoveFromArr} from '../../helpers/generalPurpose'
+
 
 const Cell = (props) => {
   
-  const cellNotes = props.cellNotes[props.inputID] 
   
   const renderTD = () => {
-    // If the current selected cell is this instance of cell, or if the cell has a value 
-    if (props.inputSelected === props.inputID || !!Number(props.cellValue)) {
+    // if the cell has a value 
+    if (!!Number(props.cellValue)) {
       // We return input
       return (
         <CellInput 
           id={props.inputID} 
           value={props.cellValue === '.' ? '' : props.cellValue} 
           disabled={false} 
-          handleChange={props.mode === 'input' ? props.handleChange : handleChange}
+          // handleChange={props.mode === 'input' ? props.handleChange : handleChange}
         />
       )
     } else {
       // Otherwise we return notes
       return (
         <NoteTable 
-          cellNotes={cellNotes} 
+          cellNotes={props.cellNotes[props.inputID]} 
         />
       )
     }
   }
 
-  const handleChange = (event) => {
-    let val = event.target.value;
-    let newNotes = addOrRemoveFromArr(cellNotes, val);
-    props.setCellNote({cellID: props.inputID, noteArr: newNotes})
-    props.setInputSelected('')
-  }
+
   
   const handleNonMutableClick = (event) => {
     if (props.currSelected !== event.target.id) {
@@ -66,9 +60,10 @@ const Cell = (props) => {
     return (
       <td 
         id={props.inputID}
-        className="cell" 
+        className="cell mutable" 
         onKeyDown={props.handleKeyDown}
-        onFocus={() => props.setInputSelected(props.inputID)}
+        onClick={() => props.setInputSelected(props.inputID)}
+        // onFocus={() => props.setInputSelected(props.inputID)}
         // tab index indicates element can be focused
         tabIndex="0"
       >

@@ -25,10 +25,7 @@ const Play = (props) => {
   const puzzleArr = puzzleObjToArr(boardState)
   
   useEffect(() => {
-    if (boardStateShouldUpdate(boardState, props.puzzleObj)) {
-      setBoardState(props.puzzleObj)
-    }
-    
+
     if (props.userID && empty(props.stats)) {
       props.getStats(props.userID)
     }
@@ -41,13 +38,15 @@ const Play = (props) => {
 
     if (props.solution && checkPuzzle({puzzleObj: boardState, solution: props.solution})) {
       let time = getTime()
-      console.log('time: ', time)
       props.sendScore({userID: props.userID, time, difficulty: props.difficulty})
     }
 
   }, [boardState, props])
 
-  
+  if (boardStateShouldUpdate(boardState, props.puzzleObj)) {
+    setBoardState(props.puzzleObj)
+  }
+
   const handleKeyDown = (event) => {
     const key = props.inputSelected
     const target = document.getElementById(key)
