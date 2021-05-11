@@ -49,9 +49,9 @@ export const findMutables = (puzzleArr) => {
   return mutables
 } 
 
-export const notMutable = (mutableInfo) => {
+export const isMutable = (mutableInfo) => {
   const {cell, mutables} = mutableInfo
-  return (mutables.indexOf(cell) === -1)
+  return (mutables.indexOf(cell) !== -1)
 }
 
 export const checkPuzzle = (puzzle) => {
