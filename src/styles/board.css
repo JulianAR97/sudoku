@@ -1,11 +1,14 @@
 #board {
-  /* border: 2px solid #000000; */
+  
   border-spacing: 0;
   margin: 10px auto 25px auto;
   background-color: #fff;
+  display: inline-block;
 }
 
 .cell {
+  display: inline-block;
+  
   border: 1px solid #000000;
   text-align: center;
   vertical-align: middle;
@@ -26,31 +29,12 @@
   height: 48px;
   margin: 0;
   outline: none;
-  padding: 0;
   text-align: center;
   width: 48px;
 }
 
 .cell > input:disabled {
   color: #000000;
-}
-
-
-.row:nth-child(3n) > .cell {
-  border-bottom: 3px solid #000000;
-}
-
-.cell:nth-child(1) {
-  border-left: 3px solid #000000;
-}
-
-
-.cell:nth-child(3n) {
-  border-right: 3px solid #000000;
-}
-
-.row:nth-child(1) > .cell {
-  border-top: 3px solid #000000;
 }
 
 .cell.mutable.red {
@@ -84,9 +68,7 @@ td.hidden {
   color: transparent;
 }
 
-/* tr.A {
-  background-color: black;
-} */
+
 
 .cell > input {
   background-color: transparent;
@@ -106,12 +88,14 @@ div.timer {
   color: blue;
 }
 
-/* :focus {
-  outline: none
-} */
+.bb {
+  border-bottom: 4px solid black;
+}
 
-/* .selected {
-  outline-color: #5E9ED6;
-  outline-style: auto;
-  outline-width: 5px
-} */
+.bl {
+  border-left: 4px solid black;
+}
+
+.centered {
+  padding: 10px;
+}
