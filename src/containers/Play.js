@@ -25,7 +25,6 @@ const Play = (props) => {
   const puzzleArr = puzzleObjToArr(boardState)
   
   useEffect(() => {
-
     if (props.userID && empty(props.stats)) {
       props.getStats(props.userID)
     }
@@ -35,7 +34,7 @@ const Play = (props) => {
       greenHighlighting(props.currSelected)
     } else {
     // Otherwise, the cell is deselected, and we need to remove the green highlighting
-      removeClassFromAll('td', 'green')
+      removeClassFromAll('div', 'green')
     }
 
     // If the game is completed, we need to check for accuracy
@@ -55,6 +54,9 @@ const Play = (props) => {
     setBoardState(props.puzzleObj)
   }
 
+  // if (currSelected !== props.currSelected) {
+  //   setCurrSelected(props.currSelected)
+  // }
 
   const handleKeyDown = (event) => {
     const key = props.inputSelected
