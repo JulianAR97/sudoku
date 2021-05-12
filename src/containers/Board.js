@@ -4,30 +4,40 @@ import Cell from '../components/boardComponents/Cell';
 
 const Board = (props) => {
   
-  const renderCells = () => { 
-    return props.puzzleArr.map((row, i) => {
+  const renderCells = (row, i) => {
+    return row.map((cellValue, j) => {
+
+      let row = numToAlpha(i)
+      let cellNumber = j + 1;
+      let id = row + cellNumber
       
-      return row.map((cellValue, j) => {
-        let row = numToAlpha(i)
-        let cellNumber = j + 1;
-        let id = row + cellNumber
-        
-        return (
-          <Cell
-            key={i + j}
-            inputID={id}
-            handleKeyDown={props.handleKeyDown}
-            cellValue={cellValue}
-          />
-        )
-      })
+      return (
+        <Cell
+          key={i + j}
+          inputID={id}
+          handleKeyDown={props.handleKeyDown}
+          handleKeyUp={props.handleKeyUp}
+          cellValue={cellValue}
+        />
+      )
+    })
+  }
+  
+  const renderRows = () => { 
+    return props.puzzleArr.map((row, i) => {
+      return (
+        <div class="r">
+          {renderCells(row, i)}
+        </div>
+      )
+      
     })
   }
 
   return (
 
     <div id="board">
-      {renderCells()}
+      {renderRows()}
     </div>
 
   )

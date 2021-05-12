@@ -50,11 +50,12 @@ const Cell = (props) => {
         id={props.inputID}
         className={className} 
         onKeyDown={props.handleKeyDown}
+        onKeyUp={props.handleKeyUp}
         onClick={() => props.setInputSelected(props.inputID)}
         // onFocus={props.setInputSelected(props.inputID)}
         // tab index indicates element can be focused
-        tabIndex={1}
-        autoFocus={props.inputID === props.inputSelected}
+        tabIndex={0}
+        focused={props.inputID === props.inputSelected}
       >
         {renderTD()}
       </div>

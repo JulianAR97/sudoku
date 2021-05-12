@@ -163,12 +163,13 @@ export const boardStateShouldUpdate = (localBoardState, reduxBoardState) => {
 
 export const difficulties = ['easy', 'medium', 'hard', 'expert'] 
 
-export const getNextKey = (key) => {
+export const getNextKey = (key, direction) => {
   const mutables = [...document.getElementsByClassName('mutable')]
   const ids = mutables.map(m => m.id)
+  
   for (let i = 0; i < ids.length; i++) {
     if (ids[i] === key) {
-      return ids[i + 1] ? ids[i + 1] : ids[0]
+      return ids[i + direction] ? ids[i + direction] : ids[0]
     }
   }
 }

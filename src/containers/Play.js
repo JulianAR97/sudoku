@@ -21,6 +21,7 @@ import StatsBoard from '../components/StatsBoard';
 const Play = (props) => {
   
   const [boardState, setBoardState] = useState(props.puzzleObj)
+  const [shiftKey, setShiftKey] = useState(false)
   const noteIconColor = props.mode === 'notes' ? '#5bb786' : 'inherit'
   const puzzleArr = puzzleObjToArr(boardState)
   
@@ -58,7 +59,18 @@ const Play = (props) => {
   //   setCurrSelected(props.currSelected)
   // }
 
+  const handleKeyUp = (event) => {
+    if (event.key === 'Shift') {
+      setShiftKey(false)
+    }
+  }
+  
   const handleKeyDown = (event) => {
+    if (event.key === 'Shift') {
+      setShiftKey(true)
+      return
+    }
+
     const key = props.inputSelected
     const target = document.getElementById(key)
     // keyVal is the actual keypress
@@ -71,7 +83,8 @@ const Play = (props) => {
     }
 
     if (keyVal === 'Tab') {
-      const nextKey = getNextKey(key)
+  
+      const nextKey = shiftKey ? getNextKey(key, -1) : getNextKey(key, 1)
       props.setInputSelected(nextKey);
       return;
     }
@@ -121,25 +134,27 @@ const Play = (props) => {
       return (
         <>
           <Timer />
-          <Board handleKeyDown={handleKeyDown} puzzleArr={puzzleArr}/>
+          <Board handleKeyDown={handleKeyDown} handleKeyUp={handleKeyUp} puzzleArr={puzzleArr}/>
           
-          <Icon 
-            id="noteIcon" 
-            icon={noteLine} 
-            color="#fad30d" 
-            style={{backgroundColor: noteIconColor, cursor: 'hand', marginRight: '10px'}}
-            fontSize="40px" 
-            onClick={handleIconClick} 
-          />
+          <div id="iconContainer">
+            <Icon 
+              id="noteIcon" 
+              icon={noteLine} 
+              color="#fad30d" 
+              style={{backgroundColor: noteIconColor, cursor: 'hand', marginRight: '10px'}}
+              fontSize="40px" 
+              onClick={handleIconClick} 
+            />
 
-          <Icon 
-            id="eraserIcon" 
-            icon={eraser20Filled} 
-            color="#ba7f9c"
-            style={{cursor: 'hand', marginLeft: '10px'}}
-            fontSize="40px"
-            onClick={handleIconClick} 
-          />
+            <Icon 
+              id="eraserIcon" 
+              icon={eraser20Filled} 
+              color="#ba7f9c"
+              style={{cursor: 'hand', marginLeft: '10px'}}
+              fontSize="40px"
+              onClick={handleIconClick} 
+            />
+          </div>
         </>
       )
     }

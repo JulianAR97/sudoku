@@ -1,20 +1,22 @@
 #board {
   background-color: #fff;
+  border: 3px solid black;
   border-spacing: 0;
   display: inline-block;
   margin: 10px auto 25px auto;
+ 
 }
 
 .cell {
-  border: 1px solid #000000;
+  border: 1px solid lightgray;
   cursor: text;
   display: inline-block;
-  height: 48px;
+  height: 56px;
   margin: 0;
   padding: 0;
   text-align: center;
   vertical-align: middle;
-  width: 48px;
+  width: 56px;
   z-index: 50;
   
 }
@@ -24,12 +26,11 @@
   border: 0;
   caret-color: #000000;
   color: blue;
-  font-size: 24px;
-  height: 48px;
+  height: inherit;
   margin: 0;
   outline: none;
   text-align: center;
-  width: 48px;
+  width: inherit;
 }
 
 .cell > input:disabled {
@@ -88,18 +89,19 @@ div.timer {
 }
 
 .bb {
-  border-bottom: 4px solid black;
+  border-bottom: 2px solid black;
 }
 
 .bl {
-  border-left: 4px solid black;
+  border-left: 2px solid black;
 }
 
-.centered {
-  padding: 10px;
-}
 
 
 .immutable {
   cursor: default;
+}
+
+div.fh.centered {
+  font-size: 40px;   
 }
