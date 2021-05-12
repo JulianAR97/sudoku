@@ -1,29 +1,34 @@
-import Row from '../components/boardComponents/Row'
 import '../styles/board.css'
 import { numToAlpha } from '../helpers/gameHelpers'
+import Cell from '../components/boardComponents/Cell';
 
 const Board = (props) => {
-
-  const renderRows = () => { 
+  
+  const renderCells = () => { 
     return props.puzzleArr.map((row, i) => {
-      return (
-        <Row 
-          key={i} 
-          handleKeyDown={props.handleKeyDown} 
-          className={numToAlpha(i)} 
-          rowValues={row} 
-        />
-      )
+      
+      return row.map((cellValue, j) => {
+        let row = numToAlpha(i)
+        let cellNumber = j + 1;
+        let id = row + cellNumber
+        
+        return (
+          <Cell
+            key={i + j}
+            inputID={id}
+            handleKeyDown={props.handleKeyDown}
+            cellValue={cellValue}
+          />
+        )
+      })
     })
   }
 
   return (
 
-    <table id="board">
-      <tbody>
-        {renderRows()}
-      </tbody>
-    </table>
+    <div id="board">
+      {renderCells()}
+    </div>
 
   )
 
