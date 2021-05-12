@@ -4,7 +4,7 @@ export const genClassName = (id, mutable) => {
 
   if (row === 'C' || row === 'F') { className += ' bb' }
   if (col === '4' || col === '7') { className += ' bl' }
-  if (mutable) { className += ' mutable' }
+  mutable ? className += ' mutable' : className += ' immutable'
 
   return className;
 }

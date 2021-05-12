@@ -98,3 +98,8 @@ div.timer {
 .centered {
   padding: 10px;
 }
+
+
+.immutable {
+  cursor: default;
+}
