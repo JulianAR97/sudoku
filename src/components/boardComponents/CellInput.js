@@ -9,12 +9,13 @@ export const CellInput = (props) => {
 
   return (
     <div
+      className="fh centered"
       type="text" 
       maxLength="1" 
       value={props.value} 
       disabled={props.disabled}
     >
-      {props.value}
+      <span>{props.value}</span>
     </div>
 
   )
