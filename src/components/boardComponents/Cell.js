@@ -1,14 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { notMutable } from '../../helpers/gameHelpers'
+import { isMutable } from '../../helpers/gameHelpers'
 import { setCurrSelected, setInputSelected, setCellNote } from '../../actions/puzzleActions'
+import { genClassName, getParentId } from '../../helpers/cellHelpers'
 import NoteTable from './NoteTable'
-import '../../styles/board.css'
 import CellInput from './CellInput'
 
 
+
 const Cell = (props) => {
-  
+  const mutable = isMutable({cell: props.inputID, mutables: props.mutables})
+  const className = genClassName(props.inputID, mutable);
+
   
   const renderTD = () => {
     // if the cell has a value 
@@ -33,32 +36,19 @@ const Cell = (props) => {
   }
 
   const handleNonMutableClick = (event) => {
-    if (props.currSelected !== event.target.id) {
-      props.setCurrSelected(event.target.id)
+    let id = getParentId(event)
+    if (props.currSelected !== id) {
+      props.setCurrSelected(id)
     } else {
       props.setCurrSelected('')
     }
   }
 
-  if (notMutable({cell: props.inputID, mutables: props.mutables})) {
+  if (isMutable({cell: props.inputID, mutables: props.mutables})) {
     return (
-      <td 
+      <div
         id={props.inputID}
-        className="cell"
-        onClick={handleNonMutableClick}
-      >
-        <CellInput 
-          id={props.inputID} 
-          value={props.cellValue} 
-          disabled={true} 
-        />
-      </td>
-    )
-  } else {
-    return (
-      <td 
-        id={props.inputID}
-        className="cell mutable" 
+        className={className} 
         onKeyDown={props.handleKeyDown}
         onClick={() => props.setInputSelected(props.inputID)}
         // onFocus={props.setInputSelected(props.inputID)}
@@ -67,7 +57,21 @@ const Cell = (props) => {
         autoFocus={props.inputID === props.inputSelected}
       >
         {renderTD()}
-      </td>
+      </div>
+    )
+  } else {
+    return (
+      <div 
+        id={props.inputID}
+        className={className}
+        onClick={handleNonMutableClick}
+      >
+        <CellInput 
+          id={props.inputID} 
+          value={props.cellValue} 
+          disabled={true} 
+        />
+      </div>
     )
   }
 
