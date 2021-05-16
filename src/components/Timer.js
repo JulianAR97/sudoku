@@ -16,7 +16,7 @@ const Timer = (props) => {
   }, [time]);
 
   return (
-    <div className="timer">
+    <div id="timer">
       {stopWatch(time)}
     </div>
   )
