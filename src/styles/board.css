@@ -80,8 +80,13 @@ td.hidden {
   background-color: rgba(0, 0, 0, .15) 
 }
 
-div.timer {
-  display: table; 
+#timer {
+  display: inline-block; 
+  font-weight: bold;
+  color: var(--epink);
+  font-size: 20px;
+  padding: 0px 5px;
+  border: 2px solid var(--epink)
 }
 
 .cell.mutable {
